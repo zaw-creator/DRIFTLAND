@@ -1,0 +1,205 @@
+.step {
+  padding: 20px 0;
+}
+
+.step h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.errorBox {
+  background: #fee;
+  border: 2px solid #e74c3c;
+  border-radius: 8px;
+  padding: 20px;
+  color: #c0392b;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 25px;
+}
+
+.formGroup label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  display: block;
+}
+
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.formGroup select.error,
+.formGroup textarea.error {
+  border-color: #e74c3c;
+}
+
+.errorText {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.eventDetails {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.eventDetails h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.eventDetails p {
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+.capacityBar {
+  width: 100%;
+  height: 10px;
+  background: #ecf0f1;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 15px 0 5px;
+}
+
+.capacityFill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transition: width 0.3s;
+}
+
+.capacityText {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.radioLabel:hover {
+  border-color: #667eea;
+  background: #f8f9fa;
+}
+
+.radioLabel input[type="radio"] {
+  cursor: pointer;
+}
+
+.radioLabel span {
+  font-weight: 500;
+}
+
+.checkboxLabel {
+  margin-left: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #ecf0f1;
+}
+
+.backButton {
+  background: #95a5a6;
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.backButton:hover {
+  background: #7f8c8d;
+}
+
+.nextButton {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nextButton:hover {
+  background: #5568d3;
+}
+
+.nextButton:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .backButton,
+  .nextButton {
+    width: 100%;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,275 @@
+.container {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.errorCard {
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+}
+
+.errorCard h2 {
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.errorCard p {
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #667eea;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background: #5568d3;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.header h1 {
+  color: #2c3e50;
+  margin: 0;
+}
+
+.status {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.verified {
+  background: #d4edda;
+  color: #155724;
+}
+
+.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.cancelled {
+  background: #d6d8db;
+  color: #383d41;
+}
+
+.regNumber {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.regNumber strong {
+  color: #667eea;
+  font-size: 1.5rem;
+}
+
+.qrSection {
+  text-align: center;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.qrSection h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.qrCode {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 15px;
+}
+
+.qrHint {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-weight: 600;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field p {
+  color: #2c3e50;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.paymentInfo {
+  background: #d4edda;
+  border-left: 4px solid #27ae60;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+}
+
+.paymentInfo h3 {
+  color: #155724;
+  margin-bottom: 10px;
+}
+
+.paymentInfo p {
+  color: #155724;
+  margin-bottom: 10px;
+}
+
+.paymentInfo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.paymentInfo li {
+  color: #155724;
+  margin-bottom: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.editButton {
+  flex: 1;
+  padding: 14px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.editButton:hover {
+  background: #5568d3;
+}
+
+.secondaryButton {
+  flex: 1;
+  padding: 14px 24px;
+  background: white;
+  color: #667eea;
+  text-align: center;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.secondaryButton:hover {
+  background: #667eea;
+  color: white;
+}
+
+.note {
+  padding: 15px;
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+  color: #856404;
+  font-size: 0.9rem;
+}
+
+.note strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 30px 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}

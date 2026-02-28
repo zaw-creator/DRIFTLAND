@@ -1,0 +1,99 @@
+.progress {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  padding: 20px;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stepWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stepNumber {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.step.active .stepNumber {
+  background: white;
+  color: #667eea;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.step.completed .stepNumber {
+  background: #27ae60;
+  color: white;
+}
+
+.stepTitle {
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.step.active .stepTitle {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.connector {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  flex: 1;
+  margin: 0 10px;
+  margin-bottom: 40px;
+}
+
+.connectorActive {
+  background: #27ae60;
+}
+
+@media (max-width: 768px) {
+  .steps {
+    flex-wrap: wrap;
+  }
+
+  .stepWrapper {
+    flex-basis: 50%;
+    margin-bottom: 20px;
+  }
+
+  .connector {
+    display: none;
+  }
+
+  .stepTitle {
+    font-size: 0.8rem;
+  }
+  
+  .stepNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
