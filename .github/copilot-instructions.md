@@ -12,10 +12,10 @@ DriftLand is comprehensive entreprise website, mainly foucused on ticketing and 
 ## Tech Stack
 
 ### Client (Frontend)
-- **Framework:** Next.js 16.1.1 with App Router ([client/src/app](client/src/app))
-- **React:** v19.2.3 with React Compiler enabled ([next.config.mjs](client/next.config.mjs))
-- **Styling:** CSS Modules (see [page.module.css](client/src/app/page.module.css))
-- **Linting:** ESLint v9 with Next.js config ([eslint.config.mjs](client/eslint.config.mjs))
+- **Framework:** Next.js 16.1.1 with App Router ([client/src/app](../client/src/app))
+- **React:** v19.2.3 with React Compiler enabled ([next.config.mjs](../client/next.config.mjs))
+- **Styling:** CSS Modules (see [page.module.css](../client/src/app/page.module.css))
+- **Linting:** ESLint v9 with Next.js config ([eslint.config.mjs](../client/eslint.config.mjs))
 
 ### Server (Backend)
 - **Runtime:** Node.js with Express v5.2.1
@@ -51,12 +51,12 @@ npm start            # Production server
 - **File Naming:** kebab-case for files, PascalCase for React components
 - **React Components:** Function components with hooks (React 19 patterns)
 - **Config Files:** `.mjs` extension for ESM configs
-- **Ignored Paths:** `.next/`, `out/`, `build/`, `node_modules/` (see [eslint.config.mjs](client/eslint.config.mjs))
+- **Ignored Paths:** `.next/`, `out/`, `build/`, `node_modules/` (see [eslint.config.mjs](../client/eslint.config.mjs))
 
 ## Project Conventions
 
 ### Frontend
-- **App Router:** Use Next.js 14+ App Router conventions (no Pages Router)
+- **App Router:** Use Next.js App Router conventions (no Pages Router)
 - **Server Components:** Default to Server Components, use `'use client'` only when needed
 - **Image Optimization:** Always use `next/image` for images
 - **Route Structure:** File-based routing in `client/src/app/`
