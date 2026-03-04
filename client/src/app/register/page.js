@@ -9,11 +9,12 @@ import SafetyRequirementsStep from "@/components/registration/steps/SafetyRequir
 import FormProgress from "@/components/registration/FormProgress";
 import styles from "./register.module.css";
 import GlitchBackground from "@/components/GlitchBackground";
+import { Suspense } from "react";
 
 const TOTAL_STEPS = 4;
 const STORAGE_KEY = "driftland_registration_draft";
 
-export default function RegisterPage() {
+function RegisterPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -573,4 +574,16 @@ export default function RegisterPage() {
     </div>
   </div>
 );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ minHeight: '100vh', background: '#000401', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p style={{ color: '#535653', fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Loading...</p>
+      </div>
+    }>
+      <RegisterPageContent />
+    </Suspense>
+  );
 }
