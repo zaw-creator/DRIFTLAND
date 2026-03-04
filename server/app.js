@@ -14,25 +14,10 @@ const app = express();
 connectDB();
 
 // Middleware
-// Middleware
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      const allowedOrigins = [
-        'http://localhost:3000',
-        process.env.CLIENT_URL,
-      ];
-      
-      // Allow all Vercel preview deployments
-      if (!origin || allowedOrigins.includes(origin) || origin.match(/https:\/\/.*\.vercel\.app$/)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  }),
-);
+app.use(cors({
+  origin: '*',
+  credentials: false,
+}));
 
 // Serve uploaded files
 app.use("/uploads", express.static("uploads"));
