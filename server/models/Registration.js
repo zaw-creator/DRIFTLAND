@@ -25,7 +25,7 @@ const registrationSchema = new mongoose.Schema({
   },
   driveType: {
     type: String,
-    enum: ["Drift", "Time Attack"],
+    enum: ["Drift", "Time Attack","Both"],
     required: [true, "Drive type is required"],
   },
   competitionClass: {

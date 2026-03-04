@@ -24,13 +24,13 @@ const vehicleSchema = new mongoose.Schema({
   },
   registrationNumber: {
     type: String,
-    required: [true, "Vehicle registration number is required"],
+    // required: [true, "Vehicle registration number is required"],
     uppercase: true,
     trim: true,
-    match: [
-      /^[0-9A-Z]{2}-[0-9]{4}$/,
-      "Registration number must be in format AA-1234",
-    ],
+    // match: [
+    //   /^[0-9A-Z]{2}-[0-9]{4}$/,
+    //   "Registration number must be in format AA-1234",
+    // ],
   },
   color: {
     type: String,

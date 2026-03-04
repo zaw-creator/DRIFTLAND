@@ -1,7 +1,7 @@
 .progress {
   max-width: 800px;
-  margin: 0 auto 40px;
-  padding: 20px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
 }
 
 .steps {
@@ -24,63 +24,73 @@
 }
 
 .stepNumber {
-  width: 50px;
-  height: 50px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  color: white;
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #535653;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
   transition: all 0.3s ease;
 }
 
 .step.active .stepNumber {
-  background: white;
-  color: #667eea;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #FFBB00;
+  border-color: #FFBB00;
+  color: #000401;
+  box-shadow: 0 0 12px rgba(255, 187, 0, 0.3);
 }
 
 .step.completed .stepNumber {
-  background: #27ae60;
-  color: white;
+  background-color: #1a1200;
+  border-color: #FFBB00;
+  color: #FFBB00;
 }
 
 .stepTitle {
-  color: white;
-  font-size: 0.9rem;
+  color: #535653;
+  font-size: 0.65rem;
   text-align: center;
-  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  transition: color 0.3s;
 }
 
 .step.active .stepTitle {
-  opacity: 1;
-  font-weight: 600;
+  color: #FFBB00;
+}
+
+.step.completed .stepTitle {
+  color: #535653;
 }
 
 .connector {
-  height: 2px;
-  background: rgba(255, 255, 255, 0.3);
+  height: 1px;
+  background-color: #1a1a1a;
   flex: 1;
-  margin: 0 10px;
-  margin-bottom: 40px;
+  margin: 0 0.5rem;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s;
 }
 
 .connectorActive {
-  background: #27ae60;
+  background-color: #FFBB00;
 }
 
 @media (max-width: 768px) {
   .steps {
     flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .stepWrapper {
-    flex-basis: 50%;
-    margin-bottom: 20px;
+    flex-basis: 45%;
   }
 
   .connector {
@@ -88,12 +98,12 @@
   }
 
   .stepTitle {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
-  
+
   .stepNumber {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
   }
 }

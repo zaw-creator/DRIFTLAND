@@ -1,155 +1,241 @@
 .container {
   min-height: 100vh;
+  background-color: #000401;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem 1.5rem;
 }
 
 .card {
-  background: white;
-  border-radius: 12px;
-  padding: 40px;
-  max-width: 600px;
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
   width: 100%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #FFBB00, transparent);
+}
+
+.cardInner {
+  padding: 2.5rem;
 }
 
 .successIcon {
-  width: 80px;
-  height: 80px;
-  background: #27ae60;
-  color: white;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: #1a1200;
+  border: 2px solid #FFBB00;
+  color: #FFBB00;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.title {
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.info {
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #FFBB00;
+  border-radius: 0 0.25rem 0.25rem 0;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.registrationNumber {
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.registrationNumber strong {
+  color: #FFBB00;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.status {
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.pending {
+  color: #FFBB00;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.message {
+  margin-bottom: 2rem;
+}
+
+.message h2 {
+  color: #535653;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.message ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.message ol li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  color: #FFFFFF;
+  line-height: 1.5;
+}
+
+.stepNumber {
+  background-color: #1a1200;
+  border: 1px solid #FFBB00;
+  color: #FFBB00;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 1.75rem;
+  height: 1.75rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
-  margin: 0 auto 20px;
-  animation: scaleIn 0.5s ease-out;
+  flex-shrink: 0;
 }
 
-@keyframes scaleIn {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
+.stepContent strong {
+  display: block;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
 }
 
-.title {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 30px;
+.stepContent p {
+  color: #ffffff;
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.5;
 }
 
-.info {
-  text-align: center;
-  margin-bottom: 30px;
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.registrationNumber {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.registrationNumber strong {
-  color: #667eea;
-  font-size: 1.4rem;
-}
-
-.status {
-  color: #7f8c8d;
-}
-
-.pending {
-  color: #f39c12;
+.stepContent a {
+  color: #FFBB00;
+  text-decoration: none;
   font-weight: 600;
 }
 
-.message {
-  margin-bottom: 30px;
-}
-
-.message h2 {
-  color: #2c3e50;
-  margin-bottom: 15px;
-}
-
-.message ol {
-  padding-left: 20px;
-}
-
-.message li {
-  margin-bottom: 15px;
-  line-height: 1.6;
-  color: #34495e;
+.stepContent a:hover {
+  text-decoration: underline;
 }
 
 .actions {
   display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .primaryButton {
   flex: 1;
-  padding: 14px 24px;
-  background: #667eea;
-  color: white;
+  background-color: #FFBB00;
+  color: #000401;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
   text-align: center;
-  border-radius: 8px;
-  font-weight: 600;
   text-decoration: none;
-  transition: background 0.3s;
+  transition: background-color 0.2s;
 }
 
 .primaryButton:hover {
-  background: #5568d3;
+  background-color: #e6a800;
 }
 
 .secondaryButton {
   flex: 1;
-  padding: 14px 24px;
-  background: white;
-  color: #667eea;
-  text-align: center;
-  border: 2px solid #667eea;
-  border-radius: 8px;
+  background: none;
+  border: 1px solid #ffffff;
+  color: #bbbbbb;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
   text-decoration: none;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .secondaryButton:hover {
-  background: #667eea;
-  color: white;
+  border-color: #535653;
+  color: #FFFFFF;
+}
+.container {
+  min-height: 100vh;
+  background-color: #000401;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  position: relative;
 }
 
 .importantNote {
-  padding: 15px;
-  background: #fff3cd;
-  border-left: 4px solid #ffc107;
-  border-radius: 4px;
-  color: #856404;
-  font-size: 0.9rem;
+  background-color: #1a1200;
+  border: 1px solid #2a2000;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: #a07800;
+  line-height: 1.5;
 }
 
 .importantNote strong {
-  display: block;
-  margin-bottom: 5px;
+  color: #FFBB00;
 }
 
 @media (max-width: 768px) {
-  .card {
-    padding: 30px 20px;
-  }
-
   .actions {
     flex-direction: column;
   }

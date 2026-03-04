@@ -38,11 +38,11 @@ export default function VehicleInfoStep({
       newErrors.year = "Vehicle year must be between 1990 and current year";
     }
 
-    if (!data.registrationNumber) {
-      newErrors.registrationNumber = "Registration number is required";
-    } else if (!validateVehicleRegistration(data.registrationNumber)) {
-      newErrors.registrationNumber = "Invalid format. Must be like: AA-1234";
-    }
+    // if (!data.registrationNumber) {
+    //   newErrors.registrationNumber = "Registration number is required";
+    // } else if (!validateVehicleRegistration(data.registrationNumber)) {
+    //   newErrors.registrationNumber = "Invalid format. Must be like: AA-1234";
+    // }
 
     if (!data.uploads.vehicleRegistration) {
       newErrors.vehicleRegistration =

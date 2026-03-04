@@ -15,6 +15,11 @@ export default function ViewRegistrationPage() {
   const [registration, setRegistration] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const getImageUrl = (filePath) => {
+  if (!filePath) return null;
+  const cleanPath = filePath.replace(/\\/g, '/');
+  return `${process.env.NEXT_PUBLIC_API_URL}/${cleanPath}`;
+};
 
   useEffect(() => {
     if (registrationId && token) {
@@ -105,6 +110,7 @@ export default function ViewRegistrationPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
+        <div className={styles.cardInner}>
         <div className={styles.header}>
           <h1>Registration Details</h1>
           <div
@@ -158,6 +164,37 @@ export default function ViewRegistrationPage() {
             </div>
           </div>
         </div>
+        <div className={styles.section}>
+  <h2>Documents</h2>
+  <div className={styles.grid}>
+    <div className={styles.field}>
+      <label>Driver License</label>
+      {registration.driver.uploads?.driverLicense ? (
+        <img
+          src={getImageUrl(registration.driver.uploads.driverLicense)}
+          alt="Driver License"
+          style={{ width: '100%', borderRadius: '0.25rem', cursor: 'pointer', marginTop: '0.5rem' }}
+          onClick={() => window.open(getImageUrl(registration.driver.uploads.driverLicense), '_blank')}
+        />
+      ) : (
+        <p>Not uploaded</p>
+      )}
+    </div>
+    <div className={styles.field}>
+      <label>Profile Photo</label>
+      {registration.driver.uploads?.profilePhoto ? (
+        <img
+          src={getImageUrl(registration.driver.uploads.profilePhoto)}
+          alt="Profile Photo"
+          style={{ width: '100%', borderRadius: '0.25rem', cursor: 'pointer', marginTop: '0.5rem' }}
+          onClick={() => window.open(getImageUrl(registration.driver.uploads.profilePhoto), '_blank')}
+        />
+      ) : (
+        <p>Not uploaded</p>
+      )}
+    </div>
+  </div>
+</div>
 
         <div className={styles.section}>
           <h2>Vehicle Information</h2>
@@ -181,7 +218,14 @@ export default function ViewRegistrationPage() {
               <p>{registration.vehicle.color || "N/A"}</p>
             </div>
           </div>
+          
         </div>
+
+        
+
+        
+        
+        
 
         <div className={styles.section}>
           <h2>Event Information</h2>
@@ -245,6 +289,7 @@ export default function ViewRegistrationPage() {
             before the event starts.
           </div>
         )}
+      </div>
       </div>
     </div>
   );

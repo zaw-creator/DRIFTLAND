@@ -1,155 +1,226 @@
 .container {
   min-height: 100vh;
-  padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #000401;
+  position: relative;
 }
 
 .header {
   text-align: center;
-  color: white;
-  margin:0px;
-}
-
-.header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.header p {
-  font-size: 1.2rem;
-  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 800px;
 }
 
 .formContainer {
   max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  width: 100%;
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
 
-/* Edit mode event display */
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.logoWrapper img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  /* filter: grayscale(100%) brightness(2); Optional: Add a subtle effect to the logo */
+  border-radius: 50%;
+}
+
+.header h1 {
+  color: #FFFFFF;
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  color: #ffffff;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* .formContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+} */
+
+/* Top accent bar */
+.formContainer::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #FFBB00, transparent);
+}
+
+.formInner {
+  padding: 2.5rem;
+}
+
 .step {
-  padding: 20px 0;
+  padding: 0;
 }
 
 .step h2 {
-  color: #2c3e50;
-  margin-bottom: 10px;
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.25rem;
 }
 
 .subtitle {
-  color: #7f8c8d;
-  margin-bottom: 30px;
+  color: #535653;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
 }
 
 .eventCard {
-  background: #f8f9fa;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px 0;
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #FFBB00;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 .eventCard h3 {
-  color: #2c3e50;
-  margin-bottom: 15px;
+  color: #FFBB00;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .eventCard p {
-  margin-bottom: 10px;
-  color: #34495e;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.eventCard p strong {
+  color: #535653;
 }
 
 .formGroup {
-  margin-bottom: 25px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .formGroup label {
+  color: #535653;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #2c3e50;
-  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .formGroup select,
 .formGroup textarea {
+  background-color: #000401;
+  border: 1px solid #2a2a2a;
+  color: #FFFFFF;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
   width: 100%;
-  padding: 12px;
-  border: 2px solid #e0e0e0;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 .formGroup select:focus,
 .formGroup textarea:focus {
-  outline: none;
-  border-color: #667eea;
+  border-color: #FFBB00;
+}
+
+.formGroup select option {
+  background-color: #0d0d0d;
 }
 
 .formGroup input[type="checkbox"] {
-  margin-right: 8px;
+  margin-right: 0.5rem;
+  accent-color: #FFBB00;
   cursor: pointer;
 }
 
 .navigation {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 2px solid #ecf0f1;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #1a1a1a;
 }
 
 .backButton {
-  background: #95a5a6;
-  color: white;
-  border: none;
-  padding: 14px 40px;
-  border-radius: 8px;
-  font-size: 1rem;
+  background: none;
+  border: 1px solid #2a2a2a;
+  color: #535653;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.2s;
 }
 
 .backButton:hover {
-  background: #7f8c8d;
+  border-color: #535653;
+  color: #FFFFFF;
 }
 
 .nextButton {
-  background: #667eea;
-  color: white;
+  background-color: #FFBB00;
+  color: #000401;
   border: none;
-  padding: 14px 40px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.2s;
 }
 
 .nextButton:hover {
-  background: #5568d3;
+  background-color: #e6a800;
 }
 
 @media (max-width: 768px) {
   .formContainer {
-    padding: 20px;
-  }
-
-  .header h1 {
-    font-size: 2rem;
+    padding: 1.5rem;
   }
 
   .navigation {
     flex-direction: column;
-    gap: 10px;
+    gap: 0.75rem;
   }
 
   .backButton,
   .nextButton {
     width: 100%;
+    text-align: center;
   }
 }

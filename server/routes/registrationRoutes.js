@@ -11,6 +11,14 @@ router.post(
   registrationController.createRegistration,
 );
 
+// Update registration (requires magic token)
+router.put(
+  "/:id",
+  uploadFields,
+  handleUploadError,
+  registrationController.updateRegistration,
+);
+
 // Lookup registration by registration number and email
 // IMPORTANT: Must come BEFORE /:id route to avoid "lookup" being treated as an ID
 router.get("/lookup", registrationController.lookupRegistration);

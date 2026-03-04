@@ -333,6 +333,7 @@ exports.lookupRegistration = async (req, res) => {
   }
 };
 
+
 // Update registration
 exports.updateRegistration = async (req, res) => {
   try {
@@ -343,58 +344,65 @@ exports.updateRegistration = async (req, res) => {
     const registration = await Registration.findById(id).populate("eventId");
 
     if (!registration) {
-      return res.status(404).json({
-        success: false,
-        error: "Registration not found",
-      });
+      return res.status(404).json({ success: false, error: "Registration not found" });
     }
 
-    // Verify magic token
     if (!registration.verifyMagicToken(token)) {
-      return res.status(401).json({
-        success: false,
-        error: "Invalid or expired access token",
-      });
+      return res.status(401).json({ success: false, error: "Invalid or expired access token" });
     }
 
-    // Check if editing is still allowed
     if (!registration.eventId.canEdit()) {
-      return res.status(403).json({
-        success: false,
-        error: `Registration cannot be edited within ${registration.eventId.editDeadlineHours} hours of the event`,
-      });
+      return res.status(403).json({ success: false, error: `Registration cannot be edited within ${registration.eventId.editDeadlineHours} hours of the event` });
     }
 
     // Update driver info if provided
     if (updates.driver) {
-      await Driver.findByIdAndUpdate(registration.driverId, updates.driver, {
-        runValidators: true,
-      });
+      const driverUpdate = typeof updates.driver === 'string'
+        ? JSON.parse(updates.driver)
+        : updates.driver;
+
+      if (req.files) {
+        if (req.files['driverLicense']) {
+          driverUpdate['uploads.driverLicense'] = req.files['driverLicense'][0].path;
+        }
+        if (req.files['profilePhoto']) {
+          driverUpdate['uploads.profilePhoto'] = req.files['profilePhoto'][0].path;
+        }
+      }
+
+      await Driver.findByIdAndUpdate(registration.driverId, driverUpdate, { runValidators: true });
     }
 
     // Update vehicle info if provided
     if (updates.vehicle) {
-      await Vehicle.findByIdAndUpdate(registration.vehicleId, updates.vehicle, {
-        runValidators: true,
-      });
+      const vehicleUpdate = typeof updates.vehicle === 'string'
+        ? JSON.parse(updates.vehicle)
+        : updates.vehicle;
+
+      if (req.files) {
+        if (req.files['vehicleRegistration']) {
+          vehicleUpdate['uploads.vehicleRegistration'] = req.files['vehicleRegistration'][0].path;
+        }
+        if (req.files['vehiclePhotos']) {
+          vehicleUpdate['uploads.vehiclePhotos'] = req.files['vehiclePhotos'].map(f => f.path);
+        }
+      }
+
+      await Vehicle.findByIdAndUpdate(registration.vehicleId, vehicleUpdate, { runValidators: true });
     }
 
     // Update registration info
     if (updates.registration) {
-      Object.assign(registration, updates.registration);
+      const regUpdate = typeof updates.registration === 'string'
+        ? JSON.parse(updates.registration)
+        : updates.registration;
+      Object.assign(registration, regUpdate);
       await registration.save();
     }
 
-    res.json({
-      success: true,
-      message: "Registration updated successfully",
-      data: registration,
-    });
+    res.json({ success: true, message: "Registration updated successfully", data: registration });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message || "Error updating registration",
-    });
+    res.status(500).json({ success: false, error: error.message || "Error updating registration" });
   }
 };
 
@@ -410,18 +418,13 @@ exports.updateRegistrationStatus = async (req, res) => {
       .populate("eventId");
 
     if (!registration) {
-      return res.status(404).json({
-        success: false,
-        error: "Registration not found",
-      });
+      return res.status(404).json({ success: false, error: "Registration not found" });
     }
 
     const oldStatus = registration.status;
     registration.status = status;
 
-    // If status changed to verified, generate QR code and send confirmation email
     if (status === "verified" && oldStatus !== "verified") {
-      // Generate QR code
       const qrResult = await qrcodeService.generateRegistrationQRCode(
         registration.registrationNumber,
         registration.driverId.fullName,
@@ -433,7 +436,6 @@ exports.updateRegistrationStatus = async (req, res) => {
 
       await registration.save();
 
-      // Send verification email
       try {
         await emailService.sendRegistrationVerifiedEmail({
           driver: registration.driverId,
@@ -448,15 +450,8 @@ exports.updateRegistrationStatus = async (req, res) => {
       await registration.save();
     }
 
-    res.json({
-      success: true,
-      message: "Registration status updated successfully",
-      data: registration,
-    });
+    res.json({ success: true, message: "Registration status updated successfully", data: registration });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message || "Error updating registration status",
-    });
+    res.status(500).json({ success: false, error: error.message || "Error updating registration status" });
   }
 };

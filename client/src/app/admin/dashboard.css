@@ -1,0 +1,120 @@
+.dashboard-page {
+  background-color: #000401;
+  min-height: 100vh;
+  color: #FFFFFF;
+}
+
+.dashboard-navbar {
+  background-color: #0d0d0d;
+  border-bottom: 1px solid #1a1a1a;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-navbar .logo .accent {
+  color: #FFBB00;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.dashboard-navbar .logo .brand {
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.dashboard-navbar .logo .subtitle {
+  color: #535653;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.logout-button {
+  background: none;
+  border: 1px solid #2a2a2a;
+  color: #535653;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-button:hover {
+  border-color: #FFBB00;
+  color: #FFBB00;
+}
+
+.dashboard-content {
+  padding: 2.5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dashboard-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-subheading {
+  color: #535653;
+  font-size: 0.85rem;
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.dashboard-card {
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  padding: 1.75rem;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+  text-decoration: none;
+  display: block;
+}
+
+.dashboard-card:hover {
+  border-color: #FFBB00;
+  transform: translateY(-2px);
+}
+
+.dashboard-card .card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-card .card-title {
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-card .card-desc {
+  color: #535653;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.dashboard-card .card-arrow {
+  color: #FFBB00;
+  font-size: 1.2rem;
+  margin-top: 1.25rem;
+  display: block;
+}

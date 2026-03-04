@@ -31,6 +31,13 @@ app.use("/api/registrations", registrationRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/safety-requirements", safetyRequirementsRoutes);
 
+// admin routes ( stil testing)
+const adminRoutes = require('./routes/adminRoutes');
+app.use('/api/admin', adminRoutes);
+
+//to get the photos
+app.use('/uploads', express.static('uploads'));
+
 // Health check
 app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });

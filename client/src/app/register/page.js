@@ -8,6 +8,7 @@ import EventSelectionStep from "@/components/registration/steps/EventSelectionSt
 import SafetyRequirementsStep from "@/components/registration/steps/SafetyRequirementsStep";
 import FormProgress from "@/components/registration/FormProgress";
 import styles from "./register.module.css";
+import GlitchBackground from "@/components/GlitchBackground";
 
 const TOTAL_STEPS = 4;
 const STORAGE_KEY = "driftland_registration_draft";
@@ -149,6 +150,7 @@ export default function RegisterPage() {
               profilePhoto: null,
               vehicleRegistration: null,
               vehiclePhotos: [],
+              
             },
           });
           setCurrentStep(parsed.currentStep);
@@ -233,6 +235,14 @@ export default function RegisterPage() {
           safetyWearAck: false,
           carComponentsAck: false,
           termsConditionsAck: false,
+          existingUploads: {
+    driverLicense: reg.driver.uploads?.driverLicense
+      ? `${process.env.NEXT_PUBLIC_API_URL}/${reg.driver.uploads.driverLicense.replace(/\\/g, '/')}`
+      : null,
+    profilePhoto: reg.driver.uploads?.profilePhoto
+      ? `${process.env.NEXT_PUBLIC_API_URL}/${reg.driver.uploads.profilePhoto.replace(/\\/g, '/')}`
+      : null,
+  },
         });
 
         // Store event info for read-only display
@@ -280,54 +290,73 @@ export default function RegisterPage() {
 
     try {
       if (isEditMode) {
-        // UPDATE MODE: Send JSON data (no file uploads on update)
-        const updateData = {
-          driver: {
-            fullName: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            dateOfBirth: formData.dateOfBirth,
-            licenseNumber: formData.licenseNumber,
-            licenseExpiry: formData.licenseExpiry,
-            address: formData.address,
-            emergencyContact: formData.emergencyContact,
-            medicalInfo: formData.medicalInfo,
-          },
-          vehicle: {
-            make: formData.make,
-            model: formData.model,
-            year: formData.year,
-            registrationNumber: formData.registrationNumber,
-            engineSpec: formData.engineSpec,
-            color: formData.color,
-          },
-          registration: {
-            driveType: formData.driveType,
-            previousExperience: formData.hasExperience,
-            specialRequirements: formData.specialRequirements,
-          },
-        };
+  const submitData = new FormData();
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/registrations/${editRegistrationId}?token=${editToken}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updateData),
-          },
-        );
+  const driverData = {
+    fullName: formData.fullName,
+    email: formData.email,
+    phone: formData.phone,
+    dateOfBirth: formData.dateOfBirth,
+    licenseNumber: formData.licenseNumber,
+    licenseExpiry: formData.licenseExpiry,
+    address: formData.address,
+    emergencyContact: formData.emergencyContact,
+    medicalInfo: formData.medicalInfo,
+  };
 
-        const result = await response.json();
+  const vehicleData = {
+    make: formData.make,
+    model: formData.model,
+    year: formData.year,
+    registrationNumber: formData.registrationNumber,
+    engineSpec: formData.engineSpec,
+    color: formData.color,
+  };
 
-        if (response.ok) {
-          alert("Registration updated successfully!");
-          router.push(`/registration/${editRegistrationId}?token=${editToken}`);
-        } else {
-          throw new Error(result.error || "Update failed");
-        }
-      } else {
+  const registrationData = {
+    driveType: formData.driveType,
+    previousExperience: formData.hasExperience,
+    specialRequirements: formData.specialRequirements,
+  };
+
+  submitData.append('driver', JSON.stringify(driverData));
+  submitData.append('vehicle', JSON.stringify(vehicleData));
+  submitData.append('registration', JSON.stringify(registrationData));
+
+  // Append files only if new ones were selected
+  if (formData.uploads.driverLicense) {
+    submitData.append('driverLicense', formData.uploads.driverLicense);
+  }
+  if (formData.uploads.profilePhoto) {
+    submitData.append('profilePhoto', formData.uploads.profilePhoto);
+  }
+  if (formData.uploads.vehicleRegistration) {
+    submitData.append('vehicleRegistration', formData.uploads.vehicleRegistration);
+  }
+  if (formData.uploads.vehiclePhotos.length > 0) {
+    formData.uploads.vehiclePhotos.forEach((photo) => {
+      submitData.append('vehiclePhotos', photo);
+    });
+  }
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/registrations/${editRegistrationId}?token=${editToken}`,
+    {
+      method: 'PUT',
+      body: submitData, // No Content-Type header — let browser set it with boundary
+    }
+  );
+
+  const result = await response.json();
+
+  if (response.ok) {
+    alert('Registration updated successfully!');
+    router.push(`/registration/${editRegistrationId}?token=${editToken}`);
+  } else {
+    throw new Error(result.error || 'Update failed');
+  }
+}
+      else {
         // CREATE MODE: Send FormData with files
         const submitData = new FormData();
 
@@ -450,145 +479,98 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className={styles.container}>
+  <div className={styles.container}>
+    <GlitchBackground />
+    <div style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh', padding: '2rem 1.5rem', boxSizing: 'border-box' }}>
+      
       <div className={styles.header}>
-        <h1>{isEditMode ? "Edit Registration" : "Driver Registration"}</h1>
-        <p>
-          {isEditMode
-            ? "Update your registration details"
-            : "Register for DriftLand Events"}
-        </p>
+        <div className={styles.logoWrapper}>
+          <img src="/logo.png" alt="DriftLand Logo" />
+        </div>
+        <h1>Driver Registration</h1>
+        <p>{isEditMode ? 'Edit your registration' : 'Register for DriftLand Events'}</p>
       </div>
+
+      <FormProgress currentStep={currentStep} totalSteps={TOTAL_STEPS} />
 
       <div className={styles.formContainer}>
-        {currentStep === 1 && (
-          <PersonalInfoStep
-            data={formData}
-            onChange={updateFormData}
-            onValidation={updateValidation}
-            onNext={handleNext}
-          />
-        )}
-
-        {currentStep === 2 && (
-          <VehicleInfoStep
-            data={formData}
-            onChange={updateFormData}
-            onValidation={updateValidation}
-            onNext={handleNext}
-            onBack={handleBack}
-          />
-        )}
-
-        {currentStep === 3 && !isEditMode && (
-          <EventSelectionStep
-            data={formData}
-            onChange={updateFormData}
-            onValidation={updateValidation}
-            onNext={handleNext}
-            onBack={handleBack}
-          />
-        )}
-
-        {currentStep === 3 && isEditMode && existingEvent && (
-          <div className={styles.step}>
-            <h2>Step 3: Event Information</h2>
-            <p className={styles.subtitle}>
-              Event cannot be changed after registration
-            </p>
-
-            <div className={styles.eventCard}>
-              <h3>{existingEvent.name}</h3>
-              <p>
-                <strong>Date:</strong>{" "}
-                {new Date(existingEvent.eventDate).toLocaleDateString("en-US", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-              <p>
-                <strong>Location:</strong> {existingEvent.location}
-              </p>
-              <p>
-                <strong>Description:</strong> {existingEvent.description}
-              </p>
+        <div className={styles.formInner}>
+          {currentStep === 1 && (
+            <PersonalInfoStep
+              data={formData}
+              onChange={updateFormData}
+              onValidation={updateValidation}
+              onNext={handleNext}
+            />
+          )}
+          {currentStep === 2 && (
+            <VehicleInfoStep
+              data={formData}
+              onChange={updateFormData}
+              onValidation={updateValidation}
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {currentStep === 3 && !isEditMode && (
+            <EventSelectionStep
+              data={formData}
+              onChange={updateFormData}
+              onValidation={updateValidation}
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {currentStep === 3 && isEditMode && existingEvent && (
+            <div className={styles.step}>
+              <h2>Step 3: Event Information</h2>
+              <p className={styles.subtitle}>Event cannot be changed after registration</p>
+              <div className={styles.eventCard}>
+                <h3>{existingEvent.name}</h3>
+                <p><strong>Date:</strong>{" "}{new Date(existingEvent.eventDate).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
+                <p><strong>Location:</strong> {existingEvent.location}</p>
+                <p><strong>Description:</strong> {existingEvent.description}</p>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Drive Type *</label>
+                <select value={formData.driveType} onChange={(e) => updateFormData({ driveType: e.target.value })}>
+                  <option value="">-- Select drive type --</option>
+                  {existingEvent.driveTypes.map((type) => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label>
+                  <input type="checkbox" checked={formData.hasExperience} onChange={(e) => updateFormData({ hasExperience: e.target.checked })} />
+                  I have previous drift/track experience
+                </label>
+              </div>
+              <div className={styles.formGroup}>
+                <label>Special Requirements (Optional)</label>
+                <textarea value={formData.specialRequirements} onChange={(e) => updateFormData({ specialRequirements: e.target.value })} placeholder="Any special requirements or notes..." rows="3" />
+              </div>
+              <div className={styles.navigation}>
+                <button type="button" onClick={handleBack} className={styles.backButton}>Back</button>
+                <button type="button" onClick={handleNext} className={styles.nextButton}>Next</button>
+              </div>
             </div>
-
-            <div className={styles.formGroup}>
-              <label>Drive Type *</label>
-              <select
-                value={formData.driveType}
-                onChange={(e) => updateFormData({ driveType: e.target.value })}
-              >
-                <option value="">-- Select drive type --</option>
-                {existingEvent.driveTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={formData.hasExperience}
-                  onChange={(e) =>
-                    updateFormData({ hasExperience: e.target.checked })
-                  }
-                />
-                I have previous drift/track experience
-              </label>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>Special Requirements (Optional)</label>
-              <textarea
-                value={formData.specialRequirements}
-                onChange={(e) =>
-                  updateFormData({ specialRequirements: e.target.value })
-                }
-                placeholder="Any special requirements or notes..."
-                rows="3"
-              />
-            </div>
-
-            <div className={styles.navigation}>
-              <button
-                type="button"
-                onClick={handleBack}
-                className={styles.backButton}
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                className={styles.nextButton}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        )}
-
-        {currentStep === 4 && (
-          <SafetyRequirementsStep
-            data={formData}
-            onChange={updateFormData}
-            onValidation={updateValidation}
-            onSubmit={handleSubmit}
-            onBack={handleBack}
-            isSubmitting={isSubmitting}
-            submitButtonText={
-              isEditMode ? "Update Registration" : "Submit Registration"
-            }
-          />
-        )}
+          )}
+          {currentStep === 4 && (
+            <SafetyRequirementsStep
+              data={formData}
+              onChange={updateFormData}
+              onValidation={updateValidation}
+              onSubmit={handleSubmit}
+              onBack={handleBack}
+              isSubmitting={isSubmitting}
+              submitButtonText={isEditMode ? "Update Registration" : "Submit Registration"}
+            />
+          )}
+        </div>
       </div>
+
     </div>
-  );
+  </div>
+);
 }

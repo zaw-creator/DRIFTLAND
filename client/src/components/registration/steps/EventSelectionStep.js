@@ -177,20 +177,18 @@ export default function EventSelectionStep({
             </div>
           )}
 
-          <div className={styles.formGroup}>
-            <label>
-              <input
-                type="checkbox"
-                checked={data.hasExperience}
-                onChange={(e) =>
-                  handleChange("hasExperience", e.target.checked)
-                }
-              />
-              <span className={styles.checkboxLabel}>
-                I have prior drifting/racing experience
-              </span>
-            </label>
-          </div>
+         <div className={styles.formGroup}>
+  <div className={styles.checkboxWrapper}>
+    <input
+      type="checkbox"
+      checked={data.hasExperience}
+      onChange={(e) => handleChange("hasExperience", e.target.checked)}
+    />
+    <span className={styles.checkboxLabel}>
+      I have prior drifting/racing experience
+    </span>
+  </div>
+</div>
 
           <div className={styles.formGroup}>
             <label>Special Requirements or Notes (Optional)</label>

@@ -25,19 +25,19 @@ const driverSchema = new mongoose.Schema({
   },
   licenseNumber: {
     type: String,
-    required: [true, "License number is required"],
+    
     uppercase: true,
     trim: true,
   },
   licenseExpiry: {
     type: Date,
-    required: [true, "License expiry date is required"],
-    validate: {
-      validator: function (date) {
-        return date > new Date();
-      },
-      message: "Driver license has expired",
-    },
+    
+    // validate: {
+    //   validator: function (date) {
+    //     return date > new Date();
+    //   },
+    //   message: "Driver license has expired",
+    // },
   },
   address: {
     type: String,
@@ -58,6 +58,7 @@ const driverSchema = new mongoose.Schema({
     bloodType: {
       type: String,
       enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"],
+       required: [true, "Blood type is required"],
       default: "Unknown",
     },
     allergies: {

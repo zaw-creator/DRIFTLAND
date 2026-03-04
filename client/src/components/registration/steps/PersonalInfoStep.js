@@ -5,7 +5,7 @@ import {
   validateEmail,
   validatePhone,
   validateAge,
-  validateLicenseExpiry,
+  // validateLicenseExpiry,
 } from "../../../utils/validation";
 import FileUpload from "../fields/FileUpload";
 import styles from "./PersonalInfoStep.module.css";
@@ -47,15 +47,16 @@ export default function PersonalInfoStep({
       }
     }
 
-    if (!data.licenseNumber) {
-      newErrors.licenseNumber = "License number is required";
-    }
+    // if (!data.licenseNumber) {
+    //   newErrors.licenseNumber = "License number is required";
+    // }
 
-    if (!data.licenseExpiry) {
-      newErrors.licenseExpiry = "License expiry date is required";
-    } else if (!validateLicenseExpiry(data.licenseExpiry)) {
-      newErrors.licenseExpiry = "Driver license has expired";
-    }
+    // if (!data.licenseExpiry) {
+    //   newErrors.licenseExpiry = "License expiry date is required";
+    // } 
+    // else if (!validateLicenseExpiry(data.licenseExpiry)) {
+    //   newErrors.licenseExpiry = "Driver license has expired";
+    // }
 
     if (!data.address) {
       newErrors.address = "Address is required";
@@ -72,6 +73,9 @@ export default function PersonalInfoStep({
     if (!data.uploads.driverLicense) {
       newErrors.driverLicense = "Driver license photo is required";
     }
+    if (!data.medicalInfo.bloodType) {
+  newErrors.bloodType = "Blood type is required";
+}
 
     setErrors(newErrors);
     const isValid = Object.keys(newErrors).length === 0;
@@ -198,7 +202,7 @@ export default function PersonalInfoStep({
         </div>
 
         <div className={styles.formGroup}>
-          <label>Driver License Number *</label>
+          <label>Driver License Number </label>
           <input
             type="text"
             value={data.licenseNumber}
@@ -214,7 +218,7 @@ export default function PersonalInfoStep({
         </div>
 
         <div className={styles.formGroup}>
-          <label>License Expiry Date *</label>
+          <label>License Expiry Date </label>
           <input
             type="date"
             value={data.licenseExpiry}
@@ -282,26 +286,28 @@ export default function PersonalInfoStep({
 
       <h3 className={styles.sectionTitle}>Medical Information</h3>
       <div className={styles.formGrid}>
-        <div className={styles.formGroup}>
-          <label>Blood Type</label>
-          <select
-            value={data.medicalInfo.bloodType}
-            onChange={(e) =>
-              handleMedicalInfoChange("bloodType", e.target.value)
-            }
-          >
-            <option value="">Select blood type</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-            <option value="Unknown">Unknown</option>
-          </select>
-        </div>
+      <div className={styles.formGroup}>
+  <label>Blood Type *</label>
+  <select
+    value={data.medicalInfo.bloodType}
+    onChange={(e) => handleMedicalInfoChange("bloodType", e.target.value)}
+    className={errors.bloodType ? styles.error : ""}
+  >
+    <option value="">Select blood type</option>
+    <option value="A+">A+</option>
+    <option value="A-">A-</option>
+    <option value="B+">B+</option>
+    <option value="B-">B-</option>
+    <option value="AB+">AB+</option>
+    <option value="AB-">AB-</option>
+    <option value="O+">O+</option>
+    <option value="O-">O-</option>
+    <option value="Unknown">Unknown</option>
+  </select>
+  {errors.bloodType && (
+    <span className={styles.errorText}>{errors.bloodType}</span>
+  )}
+</div>
 
         <div className={styles.formGroup}>
           <label>Allergies</label>
@@ -331,17 +337,25 @@ export default function PersonalInfoStep({
       <h3 className={styles.sectionTitle}>Document Uploads</h3>
       <div className={styles.formGrid}>
         <div className={styles.formGroup}>
-          <label>Driver License Photo *</label>
-          <FileUpload
-            file={data.uploads.driverLicense}
-            onChange={(file) => handleFileChange("driverLicense", file)}
-            accept="image/*,.pdf"
-            maxSize={5}
-          />
-          {errors.driverLicense && (
-            <span className={styles.errorText}>{errors.driverLicense}</span>
-          )}
-        </div>
+  <label>Driver License Photo *</label>
+  <FileUpload
+    file={data.uploads.driverLicense}
+    onChange={(file) => handleFileChange("driverLicense", file)}
+    accept="image/*,.pdf"
+    maxSize={5}
+  />
+  {/* Show existing photo in edit mode */}
+  {!data.uploads.driverLicense && data.existingUploads?.driverLicense && (
+    <img
+      src={data.existingUploads.driverLicense}
+      alt="Current Driver License"
+      style={{ width: '100%', marginTop: '0.5rem', borderRadius: '0.25rem', opacity: 0.7 }}
+    />
+  )}
+  {errors.driverLicense && (
+    <span className={styles.errorText}>{errors.driverLicense}</span>
+  )}
+</div>
 
         <div className={styles.formGroup}>
           <label>Profile Photo (Optional)</label>

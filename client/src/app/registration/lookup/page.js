@@ -51,12 +51,15 @@ export default function LookupPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
+  <div className={styles.container}>
+    <div className={styles.card}>
+      <div className={styles.cardInner}>
+        <div className={styles.logoWrapper}>
+          <img src="/logo.png" alt="DriftLand Logo" />
+        </div>
         <h1 className={styles.title}>Check Registration Status</h1>
         <p className={styles.subtitle}>
-          Enter your registration number and email address to view your
-          registration details
+          Enter your registration number and email address to view your registration details
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -65,9 +68,7 @@ export default function LookupPage() {
             <input
               type="text"
               value={formData.registrationNumber}
-              onChange={(e) =>
-                handleChange("registrationNumber", e.target.value.toUpperCase())
-              }
+              onChange={(e) => handleChange("registrationNumber", e.target.value.toUpperCase())}
               placeholder="DR-2026-0001"
               required
             />
@@ -86,11 +87,7 @@ export default function LookupPage() {
 
           {error && <div className={styles.error}>{error}</div>}
 
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={loading}
-          >
+          <button type="submit" className={styles.submitButton} disabled={loading}>
             {loading ? "Searching..." : "View Registration"}
           </button>
         </form>
@@ -98,11 +95,11 @@ export default function LookupPage() {
         <div className={styles.helpText}>
           <p>
             <strong>Can't find your registration number?</strong>
-            <br />
             Check the confirmation email we sent you when you registered.
           </p>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
