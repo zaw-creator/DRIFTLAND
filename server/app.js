@@ -7,6 +7,7 @@ const connectDB = require("./config/database");
 const registrationRoutes = require("./routes/registrationRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const safetyRequirementsRoutes = require("./routes/safetyRequirementsRoutes");
+const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 
@@ -18,21 +19,17 @@ app.use(cors({
   origin: '*',
   credentials: false,
 }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded files
-app.use("/uploads", express.static("uploads"));
+app.use('/uploads', express.static('uploads'));
 
 // Routes
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/safety-requirements", safetyRequirementsRoutes);
-
-// admin routes ( stil testing)
-const adminRoutes = require('./routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
-
-//to get the photos
-app.use('/uploads', express.static('uploads'));
 
 // Health check
 app.get("/health", (req, res) => {
