@@ -22,7 +22,9 @@ app.use(
         'http://localhost:3000',
         process.env.CLIENT_URL,
       ];
-      if (!origin || allowedOrigins.includes(origin)) {
+      
+      // Allow all Vercel preview deployments
+      if (!origin || allowedOrigins.includes(origin) || origin.match(/https:\/\/.*\.vercel\.app$/)) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
