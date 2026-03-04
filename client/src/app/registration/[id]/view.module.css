@@ -1,0 +1,351 @@
+.container {
+  min-height: 100vh;
+  background-color: #000401;
+  padding: 2rem 1.5rem;
+}
+
+.card {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #FFBB00, transparent);
+}
+
+.cardInner {
+  padding: 2.5rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: #535653;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.errorCard {
+  max-width: 480px;
+  margin: 4rem auto;
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.errorCard h2 {
+  color: #ff4444;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+}
+
+.errorCard p {
+  color: #535653;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #FFBB00;
+  color: #000401;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #e6a800;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.header h1 {
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.verified {
+  background-color: #002a00;
+  color: #00cc44;
+  border: 1px solid #003a00;
+}
+
+.pending {
+  background-color: #2a2000;
+  color: #FFBB00;
+  border: 1px solid #3a3000;
+}
+
+.rejected {
+  background-color: #2a0000;
+  color: #ff4444;
+  border: 1px solid #3a0000;
+}
+
+.cancelled {
+  background-color: #1a1a1a;
+  color: #535653;
+  border: 1px solid #2a2a2a;
+}
+
+.regNumber {
+  text-align: center;
+  padding: 1.25rem;
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #FFBB00;
+  border-radius: 0 0.25rem 0.25rem 0;
+  margin-bottom: 2rem;
+  font-size: 0.85rem;
+  color: #535653;
+}
+
+.regNumber strong {
+  color: #FFBB00;
+  font-family: monospace;
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+}
+
+.qrSection {
+  text-align: center;
+  padding: 2rem;
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.qrSection h2 {
+  color: #FFBB00;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.25rem;
+}
+
+.qrCode {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 1rem;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  background-color: #FFFFFF;
+}
+
+.qrHint {
+  color: #535653;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  color: #FFBB00;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid #FFBB00;
+  background-color: #111;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.25rem;
+  padding: 0.85rem 1rem;
+}
+
+.field label {
+  color: #535653;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.field p {
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.paymentInfo {
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #00cc44;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.paymentInfo h3 {
+  color: #00cc44;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+}
+
+.paymentInfo p {
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.paymentInfo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.paymentInfo li {
+  color: #535653;
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.editButton {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background-color: #FFBB00;
+  color: #000401;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton:hover {
+  background-color: #e6a800;
+}
+
+.secondaryButton {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: none;
+  color: #535653;
+  text-align: center;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.secondaryButton:hover {
+  border-color: #535653;
+  color: #FFFFFF;
+}
+
+.note {
+  padding: 1rem;
+  background-color: #1a1200;
+  border: 1px solid #2a2000;
+  border-radius: 0.25rem;
+  color: #a07800;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.note strong {
+  color: #FFBB00;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+  .cardInner {
+    padding: 1.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}

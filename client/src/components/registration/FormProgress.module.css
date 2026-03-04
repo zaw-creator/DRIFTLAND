@@ -1,0 +1,109 @@
+.progress {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stepWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stepNumber {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #535653;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.step.active .stepNumber {
+  background-color: #FFBB00;
+  border-color: #FFBB00;
+  color: #000401;
+  box-shadow: 0 0 12px rgba(255, 187, 0, 0.3);
+}
+
+.step.completed .stepNumber {
+  background-color: #1a1200;
+  border-color: #FFBB00;
+  color: #FFBB00;
+}
+
+.stepTitle {
+  color: #535653;
+  font-size: 0.65rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.step.active .stepTitle {
+  color: #FFBB00;
+}
+
+.step.completed .stepTitle {
+  color: #535653;
+}
+
+.connector {
+  height: 1px;
+  background-color: #1a1a1a;
+  flex: 1;
+  margin: 0 0.5rem;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s;
+}
+
+.connectorActive {
+  background-color: #FFBB00;
+}
+
+@media (max-width: 768px) {
+  .steps {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .stepWrapper {
+    flex-basis: 45%;
+  }
+
+  .connector {
+    display: none;
+  }
+
+  .stepTitle {
+    font-size: 0.6rem;
+  }
+
+  .stepNumber {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+}

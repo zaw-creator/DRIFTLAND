@@ -1,0 +1,226 @@
+.container {
+  min-height: 100vh;
+  background-color: #000401;
+  position: relative;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.formContainer {
+  max-width: 800px;
+  width: 100%;
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.logoWrapper img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  /* filter: grayscale(100%) brightness(2); Optional: Add a subtle effect to the logo */
+  border-radius: 50%;
+}
+
+.header h1 {
+  color: #FFFFFF;
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  color: #ffffff;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* .formContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+} */
+
+/* Top accent bar */
+.formContainer::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #FFBB00, transparent);
+}
+
+.formInner {
+  padding: 2.5rem;
+}
+
+.step {
+  padding: 0;
+}
+
+.step h2 {
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: #535653;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.eventCard {
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #FFBB00;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.eventCard h3 {
+  color: #FFBB00;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.eventCard p {
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.eventCard p strong {
+  color: #535653;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  color: #535653;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup select,
+.formGroup textarea {
+  background-color: #000401;
+  border: 1px solid #2a2a2a;
+  color: #FFFFFF;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formGroup select:focus,
+.formGroup textarea:focus {
+  border-color: #FFBB00;
+}
+
+.formGroup select option {
+  background-color: #0d0d0d;
+}
+
+.formGroup input[type="checkbox"] {
+  margin-right: 0.5rem;
+  accent-color: #FFBB00;
+  cursor: pointer;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #1a1a1a;
+}
+
+.backButton {
+  background: none;
+  border: 1px solid #2a2a2a;
+  color: #535653;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backButton:hover {
+  border-color: #535653;
+  color: #FFFFFF;
+}
+
+.nextButton {
+  background-color: #FFBB00;
+  color: #000401;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nextButton:hover {
+  background-color: #e6a800;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 1.5rem;
+  }
+
+  .navigation {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .backButton,
+  .nextButton {
+    width: 100%;
+    text-align: center;
+  }
+}

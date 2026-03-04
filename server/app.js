@@ -1,0 +1,87 @@
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/database");
+
+// Import routes
+const registrationRoutes = require("./routes/registrationRoutes");
+const eventRoutes = require("./routes/eventRoutes");
+const safetyRequirementsRoutes = require("./routes/safetyRequirementsRoutes");
+
+const app = express();
+
+// Connect to MongoDB
+connectDB();
+
+// Middleware
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    credentials: true,
+  }),
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve uploaded files
+app.use("/uploads", express.static("uploads"));
+
+// Routes
+app.use("/api/registrations", registrationRoutes);
+app.use("/api/events", eventRoutes);
+app.use("/api/safety-requirements", safetyRequirementsRoutes);
+
+// admin routes ( stil testing)
+const adminRoutes = require('./routes/adminRoutes');
+app.use('/api/admin', adminRoutes);
+
+//to get the photos
+app.use('/uploads', express.static('uploads'));
+
+// Health check
+app.get("/health", (req, res) => {
+  res.json({ status: "OK", message: "Server is running" });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  if (err.name === "ValidationError") {
+    return res.status(400).json({
+      success: false,
+      error: "Validation failed",
+      details: err.errors,
+    });
+  }
+
+  if (err.code === 11000) {
+    return res.status(409).json({
+      success: false,
+      error: "Duplicate entry",
+      field: Object.keys(err.keyPattern)[0],
+    });
+  }
+
+  res.status(500).json({
+    success: false,
+    error: err.message || "Internal server error",
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    error: "Route not found",
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+});
+
+module.exports = app;

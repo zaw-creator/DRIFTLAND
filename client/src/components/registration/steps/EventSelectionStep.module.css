@@ -1,0 +1,294 @@
+.step {
+  padding: 0;
+}
+
+.step h2 {
+  color: #FFBB00;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #535653;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.errorBox {
+  background-color: #1a0000;
+  border: 1px solid #ff4444;
+  color: #ff6666;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  color: #ffffff;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  background-color: #000401;
+  border: 1px solid #2a2a2a;
+  color: #FFFFFF;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.formGroup select:focus,
+.formGroup textarea:focus {
+  border-color: #FFBB00;
+}
+
+.formGroup select.error,
+.formGroup textarea.error {
+  border-color: #ff4444;
+}
+
+.formGroup select option {
+  background-color: #0d0d0d;
+  color: #FFFFFF;
+}
+
+.formGroup textarea::placeholder {
+  color: #535653;
+}
+
+.errorText {
+  color: #ff4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.eventDetails {
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #FFBB00;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.eventDetails h3 {
+  color: #FFBB00;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.eventDetails p {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #FFFFFF;
+}
+
+.eventDetails p strong {
+  color: #989c98;
+  margin-right: 0.5rem;
+}
+
+.capacityBar {
+  width: 100%;
+  height: 4px;
+  background-color: #1a1a1a;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 1rem 0 0.5rem;
+}
+
+.capacityFill {
+  height: 100%;
+  background-color: #FFBB00;
+  transition: width 0.3s;
+}
+
+.capacityText {
+  color: #535653;
+  font-size: 0.75rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+  color: #535653;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.radioLabel input[type="radio"] {
+  accent-color: #FFBB00;
+  cursor: pointer;
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.radioLabel span {
+  font-weight: 500;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.radioLabel:hover {
+  border-color: #FFBB00;
+  color: #FFFFFF;
+}
+
+.radioLabel input[type="radio"] {
+  accent-color: #FFBB00;
+  cursor: pointer;
+}
+
+.radioLabel input[type="radio"]:checked + span {
+  color: #FFBB00;
+}
+
+.radioLabel:has(input:checked) {
+  border-color: #FFBB00;
+  color: #FFBB00;
+  background-color: #1a1200;
+}
+
+.radioLabel span {
+  font-weight: 500;
+}
+
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkboxWrapper input[type="checkbox"] {
+  accent-color: #FFBB00;
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+}
+
+.checkboxLabel {
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #1a1a1a;
+}
+
+.backButton {
+  background: none;
+  border: 1px solid #2a2a2a;
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backButton:hover {
+  border-color: #535653;
+  color: #FFFFFF;
+}
+
+.nextButton {
+  background-color: #FFBB00;
+  color: #000401;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nextButton:hover {
+  background-color: #e6a800;
+}
+
+.nextButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .backButton,
+  .nextButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+  }
+}

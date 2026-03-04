@@ -1,0 +1,120 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Base sliding images */
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) brightness(0.4) contrast(1.2);
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* Glitch layer 1 - shifts red channel */
+.glitch1 {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) brightness(0.4) contrast(1.2);
+  opacity: 0;
+  mix-blend-mode: screen;
+  animation: glitch1 8s infinite;
+}
+
+/* Glitch layer 2 - shifts blue channel */
+.glitch2 {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) brightness(0.4) contrast(1.2);
+  opacity: 0;
+  mix-blend-mode: screen;
+  animation: glitch2 8s infinite;
+}
+
+/* Dark overlay to keep content readable */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 4, 1, 0.75) 0%,
+    rgba(0, 4, 1, 0.6) 50%,
+    rgba(0, 4, 1, 0.85) 100%
+  );
+}
+.staticBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) brightness(0.35) contrast(1.2);
+}
+
+@keyframes glitch1 {
+  0%, 90%, 100% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(0 0 100% 0);
+  }
+  91% {
+    opacity: 0.4;
+    transform: translate(-4px, 0);
+    clip-path: inset(20% 0 60% 0);
+  }
+  92% {
+    opacity: 0.4;
+    transform: translate(4px, 0);
+    clip-path: inset(50% 0 30% 0);
+  }
+  93% {
+    opacity: 0.4;
+    transform: translate(-2px, 0);
+    clip-path: inset(70% 0 10% 0);
+  }
+  94% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes glitch2 {
+  0%, 92%, 100% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(0 0 100% 0);
+  }
+  93% {
+    opacity: 0.3;
+    transform: translate(4px, 0);
+    clip-path: inset(10% 0 70% 0);
+  }
+  94% {
+    opacity: 0.3;
+    transform: translate(-4px, 0);
+    clip-path: inset(40% 0 40% 0);
+  }
+  95% {
+    opacity: 0.3;
+    transform: translate(2px, 0);
+    clip-path: inset(80% 0 5% 0);
+  }
+  96% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(0 0 100% 0);
+  }
+}

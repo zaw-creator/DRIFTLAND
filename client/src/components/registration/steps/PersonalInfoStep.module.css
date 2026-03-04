@@ -1,0 +1,181 @@
+.step {
+  padding: 0;
+}
+
+.step h2 {
+  color: #FFbb00;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: #ffbb00;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.formGroup label {
+  color: #ffffff;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  background-color: #000401;
+  border: 1px solid #2a2a2a;
+  color: #FFFFFF;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border-color: #FFBB00;
+}
+
+.formGroup input.error,
+.formGroup textarea.error,
+.formGroup select.error {
+  border-color: #ff4444;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #535653;
+}
+
+/* Fix date input color on webkit */
+.formGroup input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.formGroup select option {
+  background-color: #0d0d0d;
+  color: #FFFFFF;
+}
+
+.errorText {
+  color: #ff4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.sectionTitle {
+  color: #FFBB00;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 2rem 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid #FFBB00;
+  background-color: #111;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.ageWarning {
+  background-color: #1a1200;
+  border: 1px solid #3a2800;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.ageWarning h3 {
+  color: #FFBB00;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.ageWarning p {
+  color: #a07800;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.warningButton {
+  background-color: #FFBB00;
+  color: #000401;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.warningButton:hover {
+  background-color: #e6a800;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #1a1a1a;
+}
+
+.nextButton {
+  background-color: #FFBB00;
+  color: #000401;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nextButton:hover {
+  background-color: #e6a800;
+}
+
+.nextButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
