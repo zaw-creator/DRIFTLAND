@@ -7,7 +7,7 @@ import GlitchBackground from "@/components/GlitchBackground";
 import { Suspense } from "react";
 
 
-function SuccessPage() {
+function SuccessPageContent() {
   const searchParams = useSearchParams();
   const registrationNumber = searchParams.get("registrationNumber");
 
