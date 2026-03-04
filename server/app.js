@@ -33,6 +33,7 @@ app.use('/api/admin', adminRoutes);
 
 // Health check
 app.get("/health", (req, res) => {
+  console.log(`[${new Date().toLocaleTimeString()}] Server pinged - staying awake!`);
   res.json({ status: "OK", message: "Server is running" });
 });
 
