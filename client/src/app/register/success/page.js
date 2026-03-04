@@ -4,9 +4,10 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import styles from "./success.module.css";
 import GlitchBackground from "@/components/GlitchBackground";
+import { Suspense } from "react";
 
 
-export default function SuccessPage() {
+function SuccessPage() {
   const searchParams = useSearchParams();
   const registrationNumber = searchParams.get("registrationNumber");
 
@@ -91,5 +92,17 @@ const steps = [
       </div>
     </div>
      </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ minHeight: '100vh', background: '#000401', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p style={{ color: '#535653', fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Loading...</p>
+      </div>
+    }>
+      <SuccessPageContent />
+    </Suspense>
   );
 }
