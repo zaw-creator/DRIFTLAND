@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import GlitchBackground from "@/components/GlitchBackground";
+import { Analytics } from "@vercel/analytics/next"
 
 export default function HomePage() {
   const [eventInfo, setEventInfo] = useState(null);
@@ -22,6 +23,7 @@ export default function HomePage() {
   return (
     <div className={styles.container}>
       <GlitchBackground />
+      <Analytics/>
 
       <div className={styles.content}>
 
