@@ -3,6 +3,10 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const adminAuth = require('../middleware/adminAuth');
 const Registration = require('../models/Registration');
+const emailService = require('../services/emailService');
+const qrcodeService = require('../services/qrcodeService');
+const Driver = require('../models/Driver');
+const Event = require('../models/Event');
 
 // Login
 router.post('/login', (req, res) => {
@@ -61,18 +65,56 @@ router.patch('/registrations/:id/status', adminAuth, async (req, res) => {
   try {
     const { status } = req.body;
 
-      const validStatuses = ['pending', 'verified', 'rejected', 'cancelled'];
+    const validStatuses = ['pending', 'verified', 'rejected', 'cancelled'];
     if (!validStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status' });
     }
-    const registration = await Registration.findByIdAndUpdate(
-      req.params.id,
-      { status },
-      { new: true }
-    );
+
+    const registration = await Registration.findById(req.params.id)
+      .populate('driverId')
+      .populate('vehicleId')
+      .populate('eventId');
+
     if (!registration) {
       return res.status(404).json({ message: 'Registration not found' });
     }
+
+    const oldStatus = registration.status;
+    registration.status = status;
+
+    // If status changed to verified, generate QR and send email
+    if (status === 'verified' && oldStatus !== 'verified') {
+      console.log('=== Generating QR code and sending verification email...');
+      
+      try {
+        const qrResult = await qrcodeService.generateRegistrationQRCode(
+          registration.registrationNumber,
+          registration.driverId.fullName,
+        );
+
+        if (qrResult.success) {
+          registration.qrCode = qrResult.qrCode;
+        }
+      } catch (qrError) {
+        console.error('QR generation failed:', qrError);
+      }
+
+      await registration.save();
+
+     emailService.sendRegistrationVerifiedEmail({
+  driver: registration.driverId,
+  registration,
+  event: registration.eventId,
+  qrCode: registration.qrCode,
+}).then(() => {
+  console.log('=== Verification email sent!');
+}).catch((emailError) => {
+  console.error('=== Verification email failed:', emailError);
+});
+    } else {
+      await registration.save();
+    }
+
     res.json(registration);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });

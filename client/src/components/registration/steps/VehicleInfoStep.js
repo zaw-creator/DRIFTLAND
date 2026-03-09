@@ -44,10 +44,10 @@ export default function VehicleInfoStep({
     //   newErrors.registrationNumber = "Invalid format. Must be like: AA-1234";
     // }
 
-    if (!data.uploads.vehicleRegistration) {
-      newErrors.vehicleRegistration =
-        "Vehicle registration document is required";
-    }
+    // if (!data.uploads.vehicleRegistration) {
+    //   newErrors.vehicleRegistration =
+    //     "Vehicle registration document is required";
+    // }
 
     if (data.uploads.vehiclePhotos.length === 0) {
       newErrors.vehiclePhotos = "At least 1 vehicle photo is required";
@@ -140,7 +140,7 @@ export default function VehicleInfoStep({
         </div>
 
         <div className={styles.formGroup}>
-          <label>Registration Number *</label>
+          <label>Registration Number </label>
           <input
             type="text"
             value={data.registrationNumber}
@@ -175,7 +175,7 @@ export default function VehicleInfoStep({
       <h3 className={styles.sectionTitle}>Vehicle Documents & Photos</h3>
       <div className={styles.formGrid}>
         <div className={styles.formGroup}>
-          <label>Vehicle Registration Document *</label>
+          <label> Wheel Tax Document </label>
           <FileUpload
             file={data.uploads.vehicleRegistration}
             onChange={(file) => handleFileChange("vehicleRegistration", file)}

@@ -231,10 +231,15 @@ export default function RegistrationDetail({ params }) {
               <span className="detail-row-label">Location</span>
               <span className="detail-row-value">{event?.location || 'N/A'}</span>
             </div>
-            <div className="detail-row">
-              <span className="detail-row-label">Drive Type</span>
-              <span className="detail-row-value">{registration.driveType}</span>
-            </div>
+           <div className="detail-row">
+  <span className="detail-row-label">Drive Type</span>
+  <span className="detail-row-value">{registration.driveType}</span>
+</div>
+<div className="detail-row">
+  <span className="detail-row-label">Category</span>
+  <span className="detail-row-value">{registration.category || 'N/A'}</span>
+</div>
+            
             <div className="detail-row">
               <span className="detail-row-label">Previous Experience</span>
               <span className="detail-row-value">

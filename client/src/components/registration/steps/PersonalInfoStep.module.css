@@ -101,6 +101,40 @@
   background-color: #111;
   border-radius: 0 0.25rem 0.25rem 0;
 }
+.phoneInput {
+  display: flex;
+  align-items: center;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  background-color: #111;
+}
+
+.phoneInput:focus-within {
+  border-color: #FFBB00;
+}
+
+.phonePrefix {
+  background-color: #1a1a1a;
+  color: #FFBB00;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-right: 1px solid #2a2a2a;
+  white-space: nowrap;
+}
+
+.phoneInput input {
+  border: none !important;
+  background: transparent !important;
+  flex: 1;
+  outline: none;
+}
+
+.phoneInput input:focus {
+  border: none !important;
+  box-shadow: none !important;
+}
 
 .ageWarning {
   background-color: #1a1200;

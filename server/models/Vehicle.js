@@ -48,7 +48,7 @@ const vehicleSchema = new mongoose.Schema({
   uploads: {
     vehicleRegistration: {
       type: String,
-      required: [true, "Vehicle registration document is required"],
+      // required: [true, "Vehicle registration document is required"],
     },
     vehiclePhotos: {
       type: [String],

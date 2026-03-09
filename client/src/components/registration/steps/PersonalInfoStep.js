@@ -174,19 +174,20 @@ export default function PersonalInfoStep({
           )}
         </div>
 
-        <div className={styles.formGroup}>
-          <label>Phone Number *</label>
-          <input
-            type="tel"
-            value={data.phone}
-            onChange={(e) => handleChange("phone", e.target.value)}
-            placeholder="+959XXXXXXXXX"
-            className={errors.phone ? styles.error : ""}
-          />
-          {errors.phone && (
-            <span className={styles.errorText}>{errors.phone}</span>
-          )}
-        </div>
+       <div className={styles.formGroup}>
+  <label>Phone Number *</label>
+  <div className={styles.phoneInput}>
+    <span className={styles.phonePrefix}>+95</span>
+    <input
+      type="tel"
+      value={data.phone.startsWith('+95') ? data.phone.slice(3) : data.phone}
+      onChange={(e) => handleChange("phone", "+95" + e.target.value.replace(/\D/g, ''))}
+      placeholder="9XXXXXXXXX"
+      className={errors.phone ? styles.error : ""}
+    />
+  </div>
+  {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
+</div>
 
         <div className={styles.formGroup}>
           <label>Date of Birth *</label>
@@ -264,24 +265,20 @@ export default function PersonalInfoStep({
             </span>
           )}
         </div>
-
-        <div className={styles.formGroup}>
-          <label>Contact Phone *</label>
-          <input
-            type="tel"
-            value={data.emergencyContact.phone}
-            onChange={(e) =>
-              handleEmergencyContactChange("phone", e.target.value)
-            }
-            placeholder="+959XXXXXXXXX"
-            className={errors.emergencyContactPhone ? styles.error : ""}
-          />
-          {errors.emergencyContactPhone && (
-            <span className={styles.errorText}>
-              {errors.emergencyContactPhone}
-            </span>
-          )}
-        </div>
+<div className={styles.formGroup}>
+  <label>Contact Phone *</label>
+  <div className={styles.phoneInput}>
+    <span className={styles.phonePrefix}>+95</span>
+    <input
+      type="tel"
+      value={data.emergencyContact.phone.startsWith('+95') ? data.emergencyContact.phone.slice(3) : data.emergencyContact.phone}
+      onChange={(e) => handleEmergencyContactChange("phone", "+95" + e.target.value.replace(/\D/g, ''))}
+      placeholder="9XXXXXXXXX"
+      className={errors.emergencyContactPhone ? styles.error : ""}
+    />
+  </div>
+  {errors.emergencyContactPhone && <span className={styles.errorText}>{errors.emergencyContactPhone}</span>}
+</div>
       </div>
 
       <h3 className={styles.sectionTitle}>Medical Information</h3>
