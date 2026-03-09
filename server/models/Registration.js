@@ -28,6 +28,10 @@ const registrationSchema = new mongoose.Schema({
     enum: ["Drift", "Time Attack","Both"],
     required: [true, "Drive type is required"],
   },
+  category: {
+  type: String,
+  default: "",
+},
   competitionClass: {
     type: String,
     default: "pending",

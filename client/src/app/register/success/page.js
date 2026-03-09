@@ -14,7 +14,7 @@ function SuccessPageContent() {
 const steps = [
   {
     title: "Check Your Email",
-    desc: "We've sent you a confirmation email with your registration details and a magic link to view or edit your registration.",
+    desc: " Registration form submit လုပ်ပြီးပါပြီ။ Email ထဲကို Registration Number ပါတဲ့ Pending Email တစ်စောင်ရောက်လာမှာဖြစ်ပါတယ်။ ",
   },
   {
     title: "Complete Your Payment",
@@ -22,11 +22,11 @@ const steps = [
   },
   {
     title: "Admin Verification",
-    desc: "Once your payment is confirmed, our admin team will verify your registration in the system.",
+    desc: "ပြိုင်ပွဲဝင်များ Registration Form Fees ပေးသွင်းပြီးလျှင် screenshot ရိုက်ယူထားပေးပါရန်နှင့် Fees ပေးသွင်းထားကြောင်း Kpay ငွေလွှဲ Screenshot ကို Page Messenger သို့ပေးပို့ပြီးမှသာ Registration  Complete ဖြစ်မှာ ဖြစ်ပါတယ်။ ",
   },
   {
     title: "Final Confirmation Email",
-    desc: "You'll receive a final confirmation email with your QR code once your registration is fully verified. Present this at the event check-in.",
+    desc: "Registration Complete ဖြစ်သွားသော Racer များကိုလည်း Admin မှတစ်ဆင့် Final Confirmation Email ပေးပို့သွားမှာ ဖြစ်ပါတယ်။ Email ထဲမှာ QR Code ပါလာမှာဖြစ်ပြီး ပြိုင်ပွဲဝင်များအနေနဲ့ အဲဒီ QR Code ကိုပြိုင်ပွဲနေ့မှာပြသရမှာဖြစ်ပါတယ်။",
   },
 ];
 

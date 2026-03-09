@@ -64,12 +64,12 @@ exports.createRegistration = async (req, res) => {
       });
     }
 
-    if (!req.files["vehicleRegistration"]) {
-      return res.status(400).json({
-        success: false,
-        message: "Required file not uploaded: Vehicle Registration is required",
-      });
-    }
+    // if (!req.files["vehicleRegistration"]) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Required file not uploaded: Vehicle Registration is required",
+    //   });
+    // }
 
     // Check event exists and is open for registration
     const event = await Event.findById(registrationData.eventId);
@@ -139,6 +139,7 @@ exports.createRegistration = async (req, res) => {
       vehicleId: vehicle._id,
       eventId: registrationData.eventId,
       driveType: registrationData.driveType,
+      category: registrationData.category,
       previousExperience: registrationData.hasExperience || false,
       specialRequirements: registrationData.specialRequirements || "",
       safetyAcknowledged,
@@ -436,16 +437,18 @@ exports.updateRegistrationStatus = async (req, res) => {
 
       await registration.save();
 
-      try {
-        await emailService.sendRegistrationVerifiedEmail({
-          driver: registration.driverId,
-          registration,
-          event: registration.eventId,
-          qrCode: registration.qrCode,
-        });
-      } catch (emailError) {
-        console.error("Email sending failed:", emailError);
-      }
+     
+emailService.sendRegistrationVerifiedEmail({
+      driver: registration.driverId,
+      registration,
+      event: registration.eventId,
+      qrCode: registration.qrCode,
+    }).then(() => {
+      console.log('=== Verification email sent!');
+    }).catch((emailError) => {
+      console.error('=== Verification email failed:', emailError);
+    });
+
     } else {
       await registration.save();
     }

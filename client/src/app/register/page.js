@@ -57,6 +57,9 @@ function RegisterPageContent() {
     // Event Selection
     eventId: "",
     driveType: "",
+    driftCategories: [],
+timeAttackCategories: [],
+category: "", // keep for backwards compat
     hasExperience: false,
     specialRequirements: "",
     // Safety Acknowledgments
@@ -314,11 +317,17 @@ function RegisterPageContent() {
     color: formData.color,
   };
 
-  const registrationData = {
-    driveType: formData.driveType,
-    previousExperience: formData.hasExperience,
-    specialRequirements: formData.specialRequirements,
-  };
+const registrationData = {
+  eventId: formData.eventId,
+  driveType: formData.driveType,
+  category: formData.driveType === 'Drift'
+    ? formData.driftCategories.join(', ')
+    : formData.driveType === 'Time Attack'
+    ? formData.timeAttackCategories.join(', ')
+    : `Drift: ${formData.driftCategories.join(', ')} | Time Attack: ${formData.timeAttackCategories.join(', ')}`,
+  hasExperience: formData.hasExperience,
+  specialRequirements: formData.specialRequirements,
+};
 
   submitData.append('driver', JSON.stringify(driverData));
   submitData.append('vehicle', JSON.stringify(vehicleData));
@@ -383,12 +392,17 @@ function RegisterPageContent() {
           color: formData.color,
         };
 
-        const registrationData = {
-          eventId: formData.eventId,
-          driveType: formData.driveType,
-          hasExperience: formData.hasExperience,
-          specialRequirements: formData.specialRequirements,
-        };
+const registrationData = {
+  eventId: formData.eventId,
+  driveType: formData.driveType,
+  category: formData.driveType === 'Drift'
+    ? formData.driftCategories.join(', ')
+    : formData.driveType === 'Time Attack'
+    ? formData.timeAttackCategories.join(', ')
+    : `Drift: ${formData.driftCategories.join(', ')} | Time Attack: ${formData.timeAttackCategories.join(', ')}`,
+  hasExperience: formData.hasExperience,
+  specialRequirements: formData.specialRequirements,
+};
 
         // Append nested data as JSON strings
         submitData.append("driver", JSON.stringify(driverData));

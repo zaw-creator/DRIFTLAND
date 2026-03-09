@@ -213,10 +213,14 @@ function ViewRegistrationPageContent() {
                 <label>Location</label>
                 <p>{registration.event.location}</p>
               </div>
-              <div className={styles.field}>
-                <label>Drive Type</label>
-                <p>{registration.driveType}</p>
-              </div>
+             <div className={styles.field}>
+  <label>Drive Type</label>
+  <p>{registration.driveType}</p>
+</div>
+<div className={styles.field}>
+  <label>Category</label>
+  <p>{registration.category || 'N/A'}</p>
+</div>
             </div>
           </div>
 
