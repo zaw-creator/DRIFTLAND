@@ -82,12 +82,14 @@ const steps = [
             </Link>
           </div>
 
-          <div className={styles.importantNote}>
-            <strong>Important:</strong> Save your registration number{" "}
-            <strong style={{ color: "#FFBB00" }}>{registrationNumber}</strong>.
-            You'll need it to check your status, make changes, or contact us on
-            Facebook.
-          </div>
+        <div className={styles.importantNote}>
+  <strong>Important:</strong> Save your registration number{" "}
+  <strong style={{ color: "#FFBB00" }}>{registrationNumber}</strong>.
+  You'll need it to check your status, make changes, or contact us on
+  Facebook.
+  <br /><br />
+  📧 <strong>Don't see our email?</strong> Please check your <strong style={{ color: "#FFBB00" }}>spam or junk folder</strong> and mark it as "Not Spam".
+</div>
         </div>
       </div>
     </div>

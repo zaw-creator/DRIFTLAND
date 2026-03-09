@@ -159,20 +159,17 @@ exports.createRegistration = async (req, res) => {
     const magicLink = `${process.env.CLIENT_URL}/registration/${registration._id}?token=${magicToken}`;
 
     // Send email
-    try {
-      await emailService.sendRegistrationPendingEmail({
-        driver,
-        registration,
-        event,
-        magicLink,
-      });
-      registration.emailSent = true;
-      await registration.save();
-    } catch (emailError) {
-      console.error("Email sending failed:", emailError);
-      // Don't fail registration if email fails
-    }
-
+   emailService.sendRegistrationPendingEmail({
+  driver,
+  registration,
+  event,
+  magicLink,
+}).then(async () => {
+  registration.emailSent = true;
+  await registration.save();
+}).catch((emailError) => {
+  console.error("Email sending failed:", emailError);
+});
     res.status(201).json({
       success: true,
       data: {
