@@ -239,9 +239,9 @@ function ViewRegistrationPageContent() {
 
           <div className={styles.actions}>
             {canEdit && (
-              // <button onClick={handleEdit} className={styles.editButton}>
-              //   Edit Registration
-              // </button>
+              <button onClick={handleEdit} className={styles.editButton}>
+                Edit Registration
+              </button>
             )}
             <Link href="/registration/lookup" className={styles.secondaryButton}>
               Search Another Registration
