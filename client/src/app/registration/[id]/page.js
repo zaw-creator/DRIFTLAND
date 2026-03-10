@@ -212,6 +212,14 @@ function ViewRegistrationPageContent() {
               <div className={styles.field}>
                 <label>Location</label>
                 <p>{registration.event.location}</p>
+                {registration.stickerNumber && (
+  <div className={styles.field}>
+    <label>Sticker Number</label>
+    <p style={{ color: '#FFBB00', fontSize: '1.5rem', fontWeight: 700 }}>
+      #{registration.stickerNumber}
+    </p>
+  </div>
+)}
               </div>
              <div className={styles.field}>
   <label>Drive Type</label>
@@ -229,9 +237,9 @@ function ViewRegistrationPageContent() {
               <h3>Payment Instructions</h3>
               <p>Please complete payment within 7 days to confirm your spot:</p>
               <ul>
-                <li>Bank: [Bank Name]</li>
+                {/* <li>Bank: [Bank Name]</li>
                 <li>Account: [Account Number]</li>
-                <li>Amount: [Amount]</li>
+                <li>Amount: [Amount]</li> */}
                 <li>Reference: {registration.registrationNumber}</li>
               </ul>
             </div>
@@ -239,9 +247,9 @@ function ViewRegistrationPageContent() {
 
           <div className={styles.actions}>
             {canEdit && (
-              // <button onClick={handleEdit} className={styles.editButton}>
-              //   Edit Registration
-              // </button>
+              <button onClick={handleEdit} className={styles.editButton}>
+                Edit Registration
+              </button>
             )}
             <Link href="/registration/lookup" className={styles.secondaryButton}>
               Search Another Registration

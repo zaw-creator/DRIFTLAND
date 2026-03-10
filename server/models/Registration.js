@@ -45,6 +45,11 @@ const registrationSchema = new mongoose.Schema({
     maxlength: [500, "Special requirements cannot exceed 500 characters"],
     trim: true,
   },
+  stickerNumber: {
+  type: String,
+  default: null,
+  trim: true,
+},
   safetyAcknowledged: {
     type: Boolean,
     required: [true, "Safety requirements must be acknowledged"],

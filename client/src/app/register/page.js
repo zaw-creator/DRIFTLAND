@@ -194,6 +194,33 @@ category: "", // keep for backwards compat
         const result = await response.json();
         const reg = result.data;
 
+// ADD THIS RIGHT HERE - before setFormData
+const parseCategories = (driveType, category) => {
+  if (!category) return { driftCategories: [], timeAttackCategories: [] };
+  
+  if (driveType === 'Drift') {
+    return {
+      driftCategories: category.split(', ').map(c => c.trim()),
+      timeAttackCategories: [],
+    };
+  } else if (driveType === 'Time Attack') {
+    return {
+      driftCategories: [],
+      timeAttackCategories: category.split(', ').map(c => c.trim()),
+    };
+  } else if (driveType === 'Both') {
+    const driftMatch = category.match(/Drift: (.+?) \| Time Attack:/);
+    const taMatch = category.match(/Time Attack: (.+)$/);
+    return {
+      driftCategories: driftMatch ? driftMatch[1].split(', ').map(c => c.trim()) : [],
+      timeAttackCategories: taMatch ? taMatch[1].split(', ').map(c => c.trim()) : [],
+    };
+  }
+  return { driftCategories: [], timeAttackCategories: [] };
+};
+
+const { driftCategories, timeAttackCategories } = parseCategories(reg.driveType, reg.category);
+
         // Pre-fill form with existing data
         setFormData({
           // Personal Info
@@ -233,6 +260,9 @@ category: "", // keep for backwards compat
           // Event Selection (read-only in edit mode)
           eventId: reg.event._id || "",
           driveType: reg.driveType || "",
+        driftCategories,
+  timeAttackCategories,
+  category: reg.category || "",
           hasExperience: reg.previousExperience || false,
           specialRequirements: reg.specialRequirements || "",
           // Safety Acknowledgments
@@ -321,13 +351,13 @@ const registrationData = {
   eventId: formData.eventId,
   driveType: formData.driveType,
   category: formData.driveType === 'Drift'
-    ? formData.driftCategories.join(', ')
+    ? formData.driftCategories.join(', ')        // ← replace this
     : formData.driveType === 'Time Attack'
-    ? formData.timeAttackCategories.join(', ')
-    : `Drift: ${formData.driftCategories.join(', ')} | Time Attack: ${formData.timeAttackCategories.join(', ')}`,
+    ? formData.timeAttackCategories.join(', ')   // ← and this
+    : `Drift: ${formData.driftCategories.join(', ')} | Time Attack: ${formData.timeAttackCategories.join(', ')}`, // ← and this
   hasExperience: formData.hasExperience,
   specialRequirements: formData.specialRequirements,
-};
+};  
 
   submitData.append('driver', JSON.stringify(driverData));
   submitData.append('vehicle', JSON.stringify(vehicleData));
@@ -396,10 +426,10 @@ const registrationData = {
   eventId: formData.eventId,
   driveType: formData.driveType,
   category: formData.driveType === 'Drift'
-    ? formData.driftCategories.join(', ')
+    ? formData.driftCategories.join(', ')        // ← replace this
     : formData.driveType === 'Time Attack'
-    ? formData.timeAttackCategories.join(', ')
-    : `Drift: ${formData.driftCategories.join(', ')} | Time Attack: ${formData.timeAttackCategories.join(', ')}`,
+    ? formData.timeAttackCategories.join(', ')   // ← and this
+    : `Drift: ${formData.driftCategories.join(', ')} | Time Attack: ${formData.timeAttackCategories.join(', ')}`, // ← and this
   hasExperience: formData.hasExperience,
   specialRequirements: formData.specialRequirements,
 };
@@ -546,15 +576,77 @@ const registrationData = {
                 <p><strong>Location:</strong> {existingEvent.location}</p>
                 <p><strong>Description:</strong> {existingEvent.description}</p>
               </div>
-              <div className={styles.formGroup}>
-                <label>Drive Type *</label>
-                <select value={formData.driveType} onChange={(e) => updateFormData({ driveType: e.target.value })}>
-                  <option value="">-- Select drive type --</option>
-                  {existingEvent.driveTypes.map((type) => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
-              </div>
+           <div className={styles.formGroup}>
+  <label>Drive Type *</label>
+  <select value={formData.driveType} onChange={(e) => updateFormData({ driveType: e.target.value, driftCategories: [], timeAttackCategories: [] })}>
+    <option value="">-- Select drive type --</option>
+    {existingEvent.driveTypes.map((type) => (
+      <option key={type} value={type}>{type}</option>
+    ))}
+  </select>
+</div>
+
+{(formData.driveType === 'Drift' || formData.driveType === 'Both') && (
+  <div className={styles.formGroup}>
+    <label>Drift Category * (select all that apply)</label>
+    {[
+      { value: 'Class A', desc: 'Recommended for Pros/Champions/OldSkoolz' },
+      { value: 'Class B', desc: 'Recommended for Advanced drifters/OldSkoolz' },
+      { value: 'Class C', desc: 'Recommended for New drifters/Beginners' },
+    ].map((cat) => (
+      <label key={cat.value} style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '0.5rem', cursor: 'pointer', color: '#fff' }}>
+        <input
+          type="checkbox"
+          value={cat.value}
+          checked={(formData.driftCategories || []).includes(cat.value)}
+          onChange={(e) => {
+            const current = formData.driftCategories || [];
+            updateFormData({
+              driftCategories: e.target.checked
+                ? [...current, cat.value]
+                : current.filter(c => c !== cat.value)
+            });
+          }}
+        />
+        <div>
+          <div style={{ fontWeight: 600, fontSize: '0.85rem' }}>{cat.value}</div>
+          <div style={{ color: '#535653', fontSize: '0.75rem' }}>{cat.desc}</div>
+        </div>
+      </label>
+    ))}
+  </div>
+)}
+
+{(formData.driveType === 'Time Attack' || formData.driveType === 'Both') && (
+  <div className={styles.formGroup}>
+    <label>Time Attack Category * (select all that apply)</label>
+    {[
+      { value: 'Class RWD', desc: 'Rear Wheel Drive' },
+      { value: 'Class AWD', desc: 'All Wheel Drive' },
+      { value: 'Class FWD', desc: 'Front Wheel Drive' },
+    ].map((cat) => (
+      <label key={cat.value} style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '0.5rem', cursor: 'pointer', color: '#fff' }}>
+        <input
+          type="checkbox"
+          value={cat.value}
+          checked={(formData.timeAttackCategories || []).includes(cat.value)}
+          onChange={(e) => {
+            const current = formData.timeAttackCategories || [];
+            updateFormData({
+              timeAttackCategories: e.target.checked
+                ? [...current, cat.value]
+                : current.filter(c => c !== cat.value)
+            });
+          }}
+        />
+        <div>
+          <div style={{ fontWeight: 600, fontSize: '0.85rem' }}>{cat.value}</div>
+          <div style={{ color: '#535653', fontSize: '0.75rem' }}>{cat.desc}</div>
+        </div>
+      </label>
+    ))}
+  </div>
+)}
               <div className={styles.formGroup}>
                 <label>
                   <input type="checkbox" checked={formData.hasExperience} onChange={(e) => updateFormData({ hasExperience: e.target.checked })} />

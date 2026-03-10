@@ -21,6 +21,117 @@
   margin-bottom: 2rem;
 }
 
+.eventCard {
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #FFBB00;
+  border-radius: 0 0.25rem 0.25rem 0;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.eventCard h3 {
+  color: #FFBB00;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 0.75rem;
+}
+
+.eventCard p {
+  color: #535653;
+  font-size: 0.85rem;
+  margin: 0.35rem 0;
+}
+
+.eventCard p strong {
+  color: #ffffff;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+  color: #535653;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.formGroup select,
+.formGroup textarea {
+  background-color: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.25rem;
+  color: #ffffff;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.85rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.formGroup select:focus,
+.formGroup textarea:focus {
+  border-color: #FFBB00;
+}
+
+.formGroup select option {
+  background-color: #111;
+  color: #ffffff;
+}
+
+.navigation {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.backButton {
+  background-color: transparent;
+  border: 1px solid #535653;
+  color: #535653;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backButton:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.nextButton {
+  background-color: #FFBB00;
+  border: none;
+  color: #000401;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.nextButton:hover {
+  background-color: #ffd000;
+}
+
 .logoWrapper {
   display: flex;
   justify-content: center;

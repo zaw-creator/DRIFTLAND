@@ -42,6 +42,40 @@ router.get('/registrations', adminAuth, async (req, res) => {
   }
 });
 
+// Update sticker number
+router.patch('/registrations/:id/sticker', adminAuth, async (req, res) => {
+  try {
+    const { stickerNumber } = req.body;
+
+    // Check if sticker number is already assigned to another registration
+    const existing = await Registration.findOne({
+      stickerNumber,
+      _id: { $ne: req.params.id } // exclude current registration
+    });
+
+    if (existing) {
+      return res.status(409).json({
+        success: false,
+        message: `Sticker number ${stickerNumber} is already assigned to registration ${existing.registrationNumber}`,
+      });
+    }
+
+    const registration = await Registration.findByIdAndUpdate(
+      req.params.id,
+      { stickerNumber },
+      { new: true }
+    );
+
+    if (!registration) {
+      return res.status(404).json({ message: 'Registration not found' });
+    }
+
+    res.json({ success: true, data: registration });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Get registration by ID
 // Get single registration
 router.get('/registrations/:id', adminAuth, async (req, res) => {
@@ -106,6 +140,7 @@ router.patch('/registrations/:id/status', adminAuth, async (req, res) => {
   registration,
   event: registration.eventId,
   qrCode: registration.qrCode,
+  stickerNumber: registration.stickerNumber,
 }).then(() => {
   console.log('=== Verification email sent!');
 }).catch((emailError) => {

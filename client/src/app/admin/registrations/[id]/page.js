@@ -312,6 +312,75 @@ export default function RegistrationDetail({ params }) {
                 {registration.emailSent ? '✓ Yes' : '✗ No'}
               </span>
             </div>
+            {/* Sticker Number */}
+<div className="detail-card">
+  <div className="detail-card-title">Sticker Number</div>
+  <div className="detail-row">
+    <span className="detail-row-label">Assigned Number</span>
+    <span className="detail-row-value mono" style={{ color: '#FFBB00', fontSize: '1.5rem', fontWeight: 700 }}>
+      {registration.stickerNumber || 'Not assigned'}
+    </span>
+  </div>
+  {registration.status === 'verified' && (
+    <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+      <input
+        type="text"
+        placeholder="Enter sticker number"
+        id="stickerInput"
+        style={{
+          background: '#111',
+          border: '1px solid #2a2a2a',
+          borderRadius: '0.25rem',
+          color: '#fff',
+          padding: '0.5rem 0.75rem',
+          fontSize: '0.85rem',
+          flex: 1,
+          outline: 'none',
+        }}
+        defaultValue={registration.stickerNumber || ''}
+      />
+      <button
+        className="btn-verify"
+        onClick={async () => {
+          const input = document.getElementById('stickerInput');
+          const stickerNumber = input.value.trim();
+          if (!stickerNumber) return alert('Please enter a sticker number');
+          
+          try {
+            const token = localStorage.getItem('adminToken');
+            const response = await fetch(
+              `${process.env.NEXT_PUBLIC_API_URL}/api/admin/registrations/${id}/sticker`,
+              {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ stickerNumber }),
+              }
+            );
+            if (response.ok) {
+              setRegistration(prev => ({ ...prev, stickerNumber }));
+              alert('Sticker number assigned!');
+            }else{
+              const result = await response.json();
+             alert(result.message || 'Failed to assign sticker number');
+            }
+          } catch (err) {
+            alert('Failed to assign sticker number');
+          }
+        }}
+      >
+        Assign
+      </button>
+    </div>
+  )}
+  {registration.status !== 'verified' && (
+    <p style={{ color: '#535653', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+      Sticker number can only be assigned to verified registrations
+    </p>
+  )}
+</div>
           </div>
           <div className="detail-card">
   <div className="detail-card-title">Vehicle Documents</div>
