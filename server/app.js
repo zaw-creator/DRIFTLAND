@@ -11,8 +11,7 @@ const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 
-// Connect to MongoDB
-connectDB();
+
 
 // Middleware
 app.use(cors({
@@ -21,6 +20,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Connect to MongoDB
+connectDB();
 
 // Serve uploaded files
 app.use('/uploads', express.static('uploads'));

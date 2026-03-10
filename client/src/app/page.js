@@ -39,35 +39,30 @@ export default function HomePage() {
         {eventInfo && (
           <div className={styles.eventInfo}>
             <p className={styles.eventName}>{eventInfo.name}</p>
-            <div className={styles.eventMeta}>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>EVENT DATE</span>
-                <span className={styles.metaValue}>
-                  {new Date(eventInfo.eventDate).toLocaleDateString("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </span>
-              </div>
-              <div className={styles.metaDivider} />
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>REGISTRATION CLOSES</span>
-                <span className={styles.metaValue}>
-                  {new Date(eventInfo.registrationDeadline).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </span>
-              </div>
-              <div className={styles.metaDivider} />
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>LOCATION</span>
-                <span className={styles.metaValue}>{eventInfo.location}</span>
-              </div>
-            </div>
+           <div className={styles.eventMeta}>
+  <div className={styles.metaItem}>
+  <span className={styles.metaLabel}>EVENT DATES</span>
+  <span className={styles.metaValue}>
+    SAT 28 — SUN 29 MARCH 2026
+  </span>
+</div>
+  <div className={styles.metaDivider} />
+  <div className={styles.metaItem}>
+    <span className={styles.metaLabel}>REGISTRATION CLOSES</span>
+    <span className={styles.metaValue}>
+      {new Date(eventInfo.registrationDeadline).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })}
+    </span>
+  </div>
+  <div className={styles.metaDivider} />
+  <div className={styles.metaItem}>
+    <span className={styles.metaLabel}>LOCATION</span>
+    <span className={styles.metaValue}>{eventInfo.location}</span>
+  </div>
+</div>
           </div>
         )}
 
