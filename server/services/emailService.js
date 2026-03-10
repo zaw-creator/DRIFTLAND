@@ -190,10 +190,11 @@ class EmailService {
                   <p style="color:#535653;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 0.25rem;">Registration Number</p>
                   <p style="color:#FFBB00;font-family:monospace;font-size:1.25rem;font-weight:700;margin:0;">${registration.registrationNumber}</p>
                 </div>
-                ${registrationData.stickerNumber ? `
+            ${registrationData.stickerNumber ? `
 <div style="background-color:#111;border:1px solid #1a1a1a;border-left:3px solid #FFBB00;border-radius:0 4px 4px 0;padding:1rem 1.25rem;margin-bottom:1.5rem;">
-  <p style="color:#535653;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 0.25rem;">Your Sticker Number</p>
+  <p style="color:#535653;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 0.25rem;">Your Car Sticker Number</p>
   <p style="color:#FFBB00;font-family:monospace;font-size:2rem;font-weight:700;margin:0;">#${registrationData.stickerNumber}</p>
+  <p style="color:#535653;font-size:0.75rem;margin:0.5rem 0 0;">This number will be placed on your car at the event</p>
 </div>
 ` : ''}
 
