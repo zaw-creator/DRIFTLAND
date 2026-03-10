@@ -238,21 +238,21 @@ function ViewRegistrationPageContent() {
           )}
 
           <div className={styles.actions}>
-            {canEdit && (
-              <button onClick={handleEdit} className={styles.editButton}>
-                Edit Registration
-              </button>
-            )}
+            {/* {canEdit && (
+              // <button onClick={handleEdit} className={styles.editButton}>
+              //   Edit Registration
+              // </button>
+            )} */}
             <Link href="/registration/lookup" className={styles.secondaryButton}>
               Search Another Registration
             </Link>
           </div>
 
-          {!canEdit && registration.status === "pending" && (
+          {/* {!canEdit && registration.status === "pending" && (
             <div className={styles.note}>
               <strong>Note:</strong> You can edit your registration until 24 hours before the event starts.
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
