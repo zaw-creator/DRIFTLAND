@@ -24,9 +24,6 @@ app.use(express.urlencoded({ extended: true }));
 // Connect to MongoDB
 connectDB();
 
-// Serve uploaded files
-app.use('/uploads', express.static('uploads'));
-
 // Routes
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/events", eventRoutes);

@@ -269,14 +269,17 @@ const { driftCategories, timeAttackCategories } = parseCategories(reg.driveType,
           safetyWearAck: false,
           carComponentsAck: false,
           termsConditionsAck: false,
-          existingUploads: {
-    driverLicense: reg.driver.uploads?.driverLicense
-      ? `${process.env.NEXT_PUBLIC_API_URL}/${reg.driver.uploads.driverLicense.replace(/\\/g, '/')}`
-      : null,
-    profilePhoto: reg.driver.uploads?.profilePhoto
-      ? `${process.env.NEXT_PUBLIC_API_URL}/${reg.driver.uploads.profilePhoto.replace(/\\/g, '/')}`
-      : null,
-  },
+          existingUploads: (() => {
+    const toUrl = (val) => {
+      if (!val) return null;
+      if (val.startsWith('http://') || val.startsWith('https://')) return val;
+      return `${process.env.NEXT_PUBLIC_API_URL}/${val.replace(/\\/g, '/')}`;
+    };
+    return {
+      driverLicense: toUrl(reg.driver.uploads?.driverLicense),
+      profilePhoto:  toUrl(reg.driver.uploads?.profilePhoto),
+    };
+  })(),
         });
 
         // Store event info for read-only display

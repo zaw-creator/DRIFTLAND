@@ -18,8 +18,8 @@ function ViewRegistrationPageContent() {
 
   const getImageUrl = (filePath) => {
     if (!filePath) return null;
-    const cleanPath = filePath.replace(/\\/g, '/');
-    return `${process.env.NEXT_PUBLIC_API_URL}/${cleanPath}`;
+    if (filePath.startsWith('http://') || filePath.startsWith('https://')) return filePath;
+    return `${process.env.NEXT_PUBLIC_API_URL}/${filePath.replace(/\\/g, '/')}`;
   };
 
   useEffect(() => {

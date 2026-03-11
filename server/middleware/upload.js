@@ -1,53 +1,33 @@
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
+const cloudinary = require("../config/cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-// Ensure upload directories exist
-const uploadDirs = [
-  "uploads/drivers/licenses",
-  "uploads/drivers/profiles",
-  "uploads/vehicles/registrations",
-  "uploads/vehicles/photos",
-];
+// Cloudinary storage configuration
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: (req, file) => {
+    const folderMap = {
+      driverLicense:       "driftland/drivers/licenses",
+      profilePhoto:        "driftland/drivers/profiles",
+      vehicleRegistration: "driftland/vehicles/registrations",
+      vehiclePhotos:       "driftland/vehicles/photos",
+    };
 
-uploadDirs.forEach((dir) => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-});
+    const sanitizedName = file.originalname
+      .replace(/[^a-zA-Z0-9.-]/g, "_")
+      .replace(/\.[^/.]+$/, ""); // strip extension — Cloudinary manages it
 
-// Storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    let uploadPath = "uploads/";
-
-    // Determine destination based on field name
-    if (file.fieldname === "driverLicense") {
-      uploadPath += "drivers/licenses";
-    } else if (file.fieldname === "profilePhoto") {
-      uploadPath += "drivers/profiles";
-    } else if (file.fieldname === "vehicleRegistration") {
-      uploadPath += "vehicles/registrations";
-    } else if (file.fieldname === "vehiclePhotos") {
-      uploadPath += "vehicles/photos";
-    }
-
-    cb(null, uploadPath);
-  },
-  filename: function (req, file, cb) {
-    // Sanitize filename
-    const sanitizedName = file.originalname.replace(/[^a-zA-Z0-9.-]/g, "_");
-    const timestamp = Date.now();
-    const ext = path.extname(sanitizedName);
-    const nameWithoutExt = path.basename(sanitizedName, ext);
-
-    cb(null, `${nameWithoutExt}-${timestamp}${ext}`);
+    return {
+      folder:        folderMap[file.fieldname] || "driftland/misc",
+      public_id:     `${sanitizedName}-${Date.now()}`,
+      resource_type: "auto", // handles both images and PDFs
+    };
   },
 });
 
 // File filter
 const fileFilter = (req, file, cb) => {
-  // Allowed file types
   const allowedTypes = /jpeg|jpg|png|pdf/;
   const extname = allowedTypes.test(
     path.extname(file.originalname).toLowerCase(),
