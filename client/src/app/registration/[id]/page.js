@@ -196,6 +196,45 @@ function ViewRegistrationPageContent() {
                 <p>{registration.vehicle.color || "N/A"}</p>
               </div>
             </div>
+</div>
+
+{/* Vehicle Photos & Documents */}
+<div className={styles.section}>
+  <h2>Vehicle Photos & Documents</h2>
+  <div className={styles.grid}>
+    {registration.vehicle.uploads?.vehiclePhotos?.length > 0 && (
+      <div className={`${styles.field} ${styles.fullWidth}`}>
+        <label>Vehicle Photos</label>
+        <div className={styles.photoGrid}>
+          {registration.vehicle.uploads.vehiclePhotos.map((photo, index) => (
+            <img
+              key={index}
+              src={getImageUrl(photo)}
+              alt={`Vehicle photo ${index + 1}`}
+              style={{ width: '100%', borderRadius: '0.25rem', cursor: 'pointer' }}
+              onClick={() => window.open(getImageUrl(photo), '_blank')}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+
+    {registration.vehicle.uploads?.vehicleRegistration && (
+      <div className={styles.field}>
+        <label>Wheel Tax Document</label>
+        <img
+          src={getImageUrl(registration.vehicle.uploads.vehicleRegistration)}
+          alt="Wheel Tax Document"
+          style={{ width: '100%', borderRadius: '0.25rem', cursor: 'pointer', marginTop: '0.5rem' }}
+          onClick={() => window.open(getImageUrl(registration.vehicle.uploads.vehicleRegistration), '_blank')}
+        />
+      </div>
+    )}
+  </div>
+</div>
+
+<div className={styles.section}>
+  <h2>Event Information</h2>
           </div>
 
           <div className={styles.section}>
