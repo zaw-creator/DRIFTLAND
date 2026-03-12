@@ -10,12 +10,16 @@ const STATUS_CLASS = {
   cancelled: 'status-cancelled',
 };
 
+
+
 export default function AdminRegistrations() {
   const router = useRouter();
   const [registrations, setRegistrations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [updatingId, setUpdatingId] = useState(null);
+  const [filterType, setFilterType] = useState('All');
+   const [filterStatus, setFilterStatus] = useState('All');
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
@@ -73,6 +77,21 @@ export default function AdminRegistrations() {
     }
   };
 
+  // Filter logic — drivers with 'Both' show in Drift AND Time Attack
+  const filteredRegistrations = registrations.filter((reg) => {
+  const typeMatch =
+    filterType === 'All' ||
+    (filterType === 'Drift' && (reg.driveType === 'Drift' || reg.driveType === 'Both')) ||
+    (filterType === 'Time Attack' && (reg.driveType === 'Time Attack' || reg.driveType === 'Both'));
+
+  const statusMatch =
+    filterStatus === 'All' ||
+    (filterStatus === 'Verified' && reg.status === 'verified') ||
+    (filterStatus === 'Not Verified' && reg.status !== 'verified');
+
+  return typeMatch && statusMatch;
+});
+
   if (loading) return <div className="reg-loading">Loading registrations...</div>;
 
   return (
@@ -93,8 +112,58 @@ export default function AdminRegistrations() {
       <div className="reg-content">
         <div className="reg-header">
           <h1 className="reg-heading">Registrations</h1>
-          <span className="reg-count">{registrations.length} total</span>
+          <span className="reg-count">{filteredRegistrations.length} total</span>
         </div>
+
+        {/* Drive Type Filter */}
+<div className="reg-filter-group">
+  <span className="reg-filter-label">Drive Type</span>
+  <div className="reg-filters">
+    {['All', 'Drift', 'Time Attack'].map((type) => (
+      <button
+        key={type}
+        className={`reg-filter-btn ${filterType === type ? 'reg-filter-active' : ''}`}
+        onClick={() => setFilterType(type)}
+      >
+        {type}
+        <span className="reg-filter-count">
+          {type === 'All'
+            ? registrations.length
+            : registrations.filter((r) =>
+                type === 'Drift'
+                  ? r.driveType === 'Drift' || r.driveType === 'Both'
+                  : r.driveType === 'Time Attack' || r.driveType === 'Both'
+              ).length}
+        </span>
+      </button>
+    ))}
+  </div>
+</div>
+
+{/* Status Filter */}
+<div className="reg-filter-group">
+  <span className="reg-filter-label">Status</span>
+  <div className="reg-filters">
+    {['All', 'Verified', 'Not Verified'].map((status) => (
+      <button
+        key={status}
+        className={`reg-filter-btn ${filterStatus === status ? 'reg-filter-active' : ''}`}
+        onClick={() => setFilterStatus(status)}
+      >
+        {status}
+        <span className="reg-filter-count">
+          {status === 'All'
+            ? registrations.length
+            : registrations.filter((r) =>
+                status === 'Verified'
+                  ? r.status === 'verified'
+                  : r.status !== 'verified'
+              ).length}
+        </span>
+      </button>
+    ))}
+  </div>
+</div>
 
         {error && <div className="reg-error">{error}</div>}
 
@@ -112,14 +181,14 @@ export default function AdminRegistrations() {
               </tr>
             </thead>
             <tbody>
-              {registrations.length === 0 ? (
+              {filteredRegistrations.length === 0 ? (
                 <tr>
                   <td colSpan={7}>
-                    <div className="reg-empty">No registrations yet</div>
+                    <div className="reg-empty">No registrations found</div>
                   </td>
                 </tr>
               ) : (
-                registrations.map((reg) => (
+                filteredRegistrations.map((reg) => (
                   <tr key={reg._id}>
                     <td><span className="reg-number">{reg.registrationNumber}</span></td>
                     <td>
