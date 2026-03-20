@@ -78,6 +78,13 @@ const registrationSchema = new mongoose.Schema({
   qrCode: {
     type: String,
   },
+  // register-server/models/Registration.js — add to existing schema
+qualifyScore: { type: Number,  default: 0 },
+qualifyRank:  { type: Number,  default: 0 },
+wins:         { type: Number,  default: 0 },
+losses:       { type: Number,  default: 0 },
+eliminated:   { type: Boolean, default: false },
+finalResult:  { type: String,  default: null },
   magicToken: {
     type: String,
     unique: true,

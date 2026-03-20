@@ -25,6 +25,12 @@ const eventSchema = new mongoose.Schema({
     min: [1, "Capacity must be at least 1"],
     default: 100,
   },
+  // register-server/models/Event.js — add to existing schema
+finalBracket:    { type: Array,   default: [] },
+safetyRules:     { type: Array,   default: [] },
+top5:            { type: Array,   default: [] },
+endedAt:         { type: Date,    default: null },
+resultsPushedAt: { type: Date,    default: null },
   registeredCount: {
     type: Number,
     default: 0,
