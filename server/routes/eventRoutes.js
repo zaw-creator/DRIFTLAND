@@ -37,7 +37,6 @@ router.get('/:id/approved-drivers', apiKeyMiddleware, async (req, res) => {
           driverId:      r.driverId._id.toString(),
           driverName:    r.driverId.fullName,
           licenseNumber: r.driverId.licenseNumber,
-          class:         r.category,
           car:           r.vehicleId
             ? `${r.vehicleId.make} ${r.vehicleId.model} ${r.vehicleId.year}`
             : '—',
@@ -49,12 +48,64 @@ router.get('/:id/approved-drivers', apiKeyMiddleware, async (req, res) => {
           eliminated:    r.eliminated    || false,
         };
 
-        // driveType 'Both' — add once for Drift, once for Time Attack
-        if (r.driveType === 'Both') {
-          drivers.push({ ...base, driveType: 'Drift' });
-          drivers.push({ ...base, driveType: 'Time Attack' });
-        } else {
-          drivers.push({ ...base, driveType: r.driveType });
+        const rawCategory = r.category || '';
+        const driveType   = r.driveType;
+
+        if (driveType === 'Both') {
+          // Format: "Drift: Class A, Class B | Time Attack: Class AWD, Class RWD"
+          const sections = rawCategory.split('|').map(s => s.trim());
+
+          sections.forEach(section => {
+            if (section.startsWith('Drift:')) {
+              const classes = section
+                .replace('Drift:', '')
+                .split(',')
+                .map(c => c.trim())
+                .filter(Boolean);
+              classes.forEach(cls => {
+                drivers.push({ ...base, driveType: 'Drift', class: cls });
+              });
+            } else if (section.startsWith('Time Attack:')) {
+              const classes = section
+                .replace('Time Attack:', '')
+                .split(',')
+                .map(c => c.trim())
+                .filter(Boolean);
+              classes.forEach(cls => {
+                drivers.push({ ...base, driveType: 'Time Attack', class: cls });
+              });
+            }
+          });
+
+        } else if (driveType === 'Drift') {
+          // Format: "Class A, Class B"
+          const classes = rawCategory
+            .split(',')
+            .map(c => c.trim())
+            .filter(Boolean);
+
+          if (classes.length > 0) {
+            classes.forEach(cls => {
+              drivers.push({ ...base, driveType: 'Drift', class: cls });
+            });
+          } else {
+            drivers.push({ ...base, driveType: 'Drift', class: 'Unassigned' });
+          }
+
+        } else if (driveType === 'Time Attack') {
+          // Format: "Class FWD" or "Class AWD, Class RWD"
+          const classes = rawCategory
+            .split(',')
+            .map(c => c.trim())
+            .filter(Boolean);
+
+          if (classes.length > 0) {
+            classes.forEach(cls => {
+              drivers.push({ ...base, driveType: 'Time Attack', class: cls });
+            });
+          } else {
+            drivers.push({ ...base, driveType: 'Time Attack', class: 'Unassigned' });
+          }
         }
       });
 
